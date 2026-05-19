@@ -23,7 +23,7 @@
             </a>
         </li>
         <li>
-            <a href="#" 
+            <a href="{{ route('budget') }}" 
                class="sidebar-item {{ request()->routeIs('budget') ? 'sidebar-active' : '' }}">
                 <i class="fa-solid fa-wallet text-xl"></i>
             </a>
