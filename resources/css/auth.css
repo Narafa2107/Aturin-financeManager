@@ -1,0 +1,185 @@
+.login-page {
+    @apply
+        min-h-screen
+        bg-black
+        text-white
+        flex
+        justify-center
+        items-center
+        relative
+        overflow-hidden;
+}
+
+.glow-top {
+    @apply
+        absolute
+        top-0
+        left-0
+        w-[400px]
+        h-[400px]
+        bg-green-500/30
+        rounded-full
+        blur-[120px];
+}
+
+.glow-bottom {
+    @apply
+        absolute
+        bottom-0
+        right-0
+        w-[400px]
+        h-[400px]
+        bg-green-500/20
+        rounded-full
+        blur-[140px];
+}
+
+.login-card {
+    @apply
+        relative
+        z-10
+        w-[340px]
+        bg-white/10
+        backdrop-blur-md
+        border
+        border-white/20
+        rounded-[18px]
+        px-8
+        py-10
+        shadow-2xl;
+}
+
+.login-logo {
+    @apply
+        flex
+        justify-center
+        mb-4;
+}
+
+.logo-img {
+    @apply
+        w-[90px];
+}
+
+.brand-title {
+    @apply
+        text-center
+        text-3xl
+        font-bold
+        mb-2;
+}
+
+.brand-subtitle {
+    @apply
+        text-center
+        text-gray-300
+        mb-8;
+}
+
+.form-label {
+    @apply
+        block
+        mb-2;
+}
+
+.form-input {
+    @apply
+        w-full
+        px-4
+        py-3
+        rounded-xl
+        border
+        border-gray-300
+        text-black
+        bg-white
+        outline-none
+        focus:ring-2
+        focus:ring-blue-500;
+}
+
+.login-btn {
+    @apply
+        w-full
+        bg-[#404DFF]
+        py-3
+        rounded-xl
+        font-semibold
+        hover:bg-[#2f3cff]
+        transition;
+}
+
+.register-page {
+    @apply
+        min-h-screen
+        bg-black
+        text-white
+        flex
+        items-center
+        justify-center
+        px-6
+        relative
+        overflow-hidden;
+}
+
+.register-container {
+    @apply
+        relative
+        z-10
+        w-full
+        max-w-6xl
+        flex
+        items-center
+        justify-between
+        gap-16;
+}
+
+.left-content {
+    @apply
+        max-w-md;
+}
+
+.left-logo {
+    @apply
+        w-24
+        mb-6;
+}
+
+.left-title {
+    @apply
+        text-5xl
+        font-bold
+        leading-tight
+        mb-5;
+}
+
+.left-description {
+    @apply
+        text-gray-300
+        text-lg;
+}
+
+.register-card {
+    @apply
+        relative
+        z-10
+        w-[340px]
+        bg-white/10
+        backdrop-blur-md
+        border
+        border-white/20
+        rounded-[18px]
+        px-8
+        py-10
+        shadow-2xl;
+}
+
+.register-btn {
+    @apply
+        w-full
+        bg-[#404DFF]
+        py-3
+        rounded-xl
+        font-semibold
+        hover:bg-[#2f3cff]
+        transition;
+}

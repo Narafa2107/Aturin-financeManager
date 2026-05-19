@@ -1,0 +1,223 @@
+/* ─── TRANSACTIONS PAGE ───────────────────── */
+/* Tambahkan ini ke file CSS yang sudah ada    */
+
+
+/* Export Button */
+.export-btn {
+    @apply
+        px-6
+        py-3
+        rounded-xl
+        bg-white
+        text-black
+        font-semibold
+        transition
+        hover:bg-gray-100
+        flex
+        items-center
+        gap-2;
+}
+
+
+/* Filter Card */
+.filter-card {
+    @apply
+        bg-white
+        rounded-2xl
+        p-6
+        flex
+        flex-col
+        gap-4;
+}
+
+.filter-top {
+    @apply
+        flex
+        gap-4
+        items-center;
+}
+
+.filter-bottom {
+    @apply
+        flex
+        gap-3
+        items-center;
+}
+
+.search-box {
+    @apply
+        flex
+        items-center
+        gap-3
+        flex-1
+        border
+        border-gray-200
+        rounded-xl
+        px-4
+        py-3
+        bg-white;
+}
+
+.search-input {
+    @apply
+        flex-1
+        outline-none
+        text-sm
+        text-gray-600
+        bg-transparent;
+}
+
+.filter-select {
+    @apply
+        border
+        border-gray-200
+        rounded-xl
+        px-4
+        py-3
+        text-sm
+        text-gray-700
+        bg-white
+        outline-none
+        cursor-pointer
+        appearance-none
+        pr-8;
+
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+}
+
+.date-input {
+    @apply
+        border
+        border-gray-200
+        rounded-xl
+        px-4
+        py-3
+        text-sm
+        text-gray-500
+        bg-white
+        outline-none;
+}
+
+
+/* Table Card */
+.table-card {
+    @apply
+        bg-white
+        rounded-2xl
+        overflow-hidden
+        border
+        border-gray-200;
+}
+
+.table-title {
+    @apply
+        text-center
+        text-xs
+        text-gray-400
+        py-2
+        border-b
+        border-green-400
+        bg-gray-50;
+
+    border-top: 3px solid theme('colors.green.400');
+}
+
+.transaction-table {
+    @apply
+        w-full
+        border-collapse;
+}
+
+.table-header-row th {
+    @apply
+        text-xs
+        text-gray-400
+        font-normal
+        py-2
+        border-b
+        border-r
+        border-gray-200
+        text-center;
+}
+
+.table-label-row th {
+    @apply
+        text-sm
+        font-bold
+        text-black
+        py-4
+        px-4
+        border-b
+        border-r
+        border-gray-200
+        text-left;
+}
+
+.table-row {
+    @apply
+        border-b
+        border-gray-100
+        hover:bg-gray-50
+        transition;
+}
+
+.table-cell {
+    @apply
+        py-4
+        px-4
+        text-sm
+        text-gray-700
+        border-r
+        border-gray-100;
+}
+
+.table-cell:last-child {
+    @apply border-r-0;
+}
+
+.row-number {
+    @apply
+        text-gray-400
+        text-xs
+        text-center;
+}
+
+
+/* Action Buttons in Table */
+.action-btns {
+    @apply
+        flex
+        gap-2;
+}
+
+.btn-edit {
+    @apply
+        w-8
+        h-8
+        rounded-lg
+        bg-green-100
+        text-green-600
+        flex
+        items-center
+        justify-center
+        text-xs
+        hover:bg-green-200
+        transition;
+}
+
+.btn-delete {
+    @apply
+        w-8
+        h-8
+        rounded-lg
+        bg-red-100
+        text-red-500
+        flex
+        items-center
+        justify-center
+        text-xs
+        hover:bg-red-200
+        transition;
+}

@@ -1,0 +1,306 @@
+.dashboard-page {
+    @apply
+        min-h-screen
+        bg-black
+        text-white
+        flex
+        overflow-hidden;
+}
+
+
+
+/* ─── SIDEBAR ─────────────────────────────── */
+
+.sidebar {
+    @apply
+        w-[90px]
+        bg-black/70
+        border-r
+        border-white/15
+        flex
+        flex-col
+        items-center
+        py-6
+        fixed  
+        left-0
+        top-0
+        h-screen
+        z-50;
+}
+
+.sidebar-menu {
+    @apply
+        flex
+        flex-col
+        gap-5;
+}
+
+.sidebar-item {
+    @apply
+        w-14
+        h-14
+        rounded-xl
+        flex
+        justify-center
+        items-center
+        text-white/50
+        transition
+        hover:text-white
+        hover:bg-white/10;
+}
+
+.sidebar-active {
+    @apply
+        bg-green-400
+        text-black
+        shadow-lg
+        hover:bg-green-400
+        hover:text-black;
+}
+
+
+
+/* ─── MAIN ────────────────────────────────── */
+
+.main-content {
+    @apply
+        flex-1
+        p-8
+        flex
+        flex-col
+        overflow-y-auto
+        ml-[90px]; 
+
+    gap: 1.5rem;
+}
+
+.top-title {
+    @apply
+        border
+        border-white/20
+        rounded-xl
+        px-8
+        py-5
+        bg-gradient-to-r
+        from-white/10
+        to-green-500/20;
+}
+
+
+
+/* ─── BUTTONS ─────────────────────────────── */
+
+.action-group {
+    @apply
+        flex
+        gap-4;
+}
+
+.income-btn {
+    @apply
+        px-6
+        py-3
+        rounded-xl
+        bg-green-400
+        text-black
+        font-semibold
+        transition
+        hover:bg-green-300;
+}
+
+.expense-btn {
+    @apply
+        px-6
+        py-3
+        rounded-xl
+        bg-white
+        text-black
+        font-semibold
+        transition
+        hover:bg-gray-100;
+}
+
+
+
+/* ─── SUMMARY CARDS ───────────────────────── */
+
+.summary-grid {
+    @apply
+        grid
+        grid-cols-4
+        gap-5;
+}
+
+.summary-card {
+    @apply
+        rounded-2xl
+        p-6
+        text-black;
+}
+
+.income-card {
+    @apply
+        bg-gradient-to-br
+        from-green-100
+        to-green-300;
+}
+
+.expense-card {
+    @apply
+        bg-gradient-to-br
+        from-red-100
+        to-red-300;
+}
+
+.budget-card {
+    @apply
+        bg-gray-200;
+}
+
+
+
+/* ─── BUDGET ALERT ────────────────────────── */
+
+.budget-alert {
+    @apply
+        flex
+        bg-yellow-50
+        rounded-2xl
+        overflow-hidden
+        border
+        border-yellow-200;
+}
+
+.alert-side {
+    @apply
+        w-2
+        bg-yellow-400
+        flex-shrink-0;
+}
+
+.alert-content {
+    @apply
+        px-6
+        py-4
+        text-yellow-800;
+}
+
+
+
+/* ─── CHART + TRANSACTION ─────────────────── */
+
+.middle-grid {
+    @apply
+        grid
+        grid-cols-2
+        gap-6;
+}
+
+.chart-card,
+.transaction-card {
+    @apply
+        bg-gray-100
+        text-black
+        rounded-2xl
+        p-7;
+}
+
+.chart-placeholder {
+    @apply
+        h-[300px]
+        bg-gray-200
+        rounded-xl;
+}
+
+
+
+/* ─── TRANSACTION LIST ────────────────────── */
+
+.transaction-list {
+    @apply
+        flex
+        flex-col
+        gap-4;
+}
+
+.transaction-item {
+    @apply
+        flex
+        items-center
+        gap-4;
+}
+
+.transaction-icon {
+    @apply
+        w-11
+        h-11
+        rounded-xl
+        flex
+        items-center
+        justify-center
+        flex-shrink-0
+        text-sm;
+}
+
+.income-icon {
+    @apply
+        bg-green-200
+        text-green-700;
+}
+
+.expense-icon {
+    @apply
+        bg-red-200
+        text-red-600;
+}
+
+.transaction-info {
+    @apply flex-1;
+}
+
+.transaction-amount {
+    @apply
+        text-sm
+        font-bold
+        flex-shrink-0;
+}
+
+
+
+/* ─── MONTHLY INSIGHT ─────────────────────── */
+
+.insight-section {
+    @apply
+        bg-gray-100
+        text-black
+        rounded-2xl
+        p-7;
+}
+
+.insight-grid {
+    @apply
+        grid
+        grid-cols-3
+        gap-5;
+}
+
+.insight-red {
+    @apply
+        bg-red-100
+        rounded-xl
+        p-5;
+}
+
+.insight-green {
+    @apply
+        bg-green-100
+        rounded-xl
+        p-5;
+}
+
+.insight-purple {
+    @apply
+        bg-purple-100
+        rounded-xl
+        p-5;
+}
