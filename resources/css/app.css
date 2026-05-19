@@ -1,5 +1,5 @@
 @import "tailwindcss";
 
 @import "./auth.css";
-@import "./dashboard.css";
-@import './transactions.css';
+@import "./main-style.css";
+@import './sidebar.css';

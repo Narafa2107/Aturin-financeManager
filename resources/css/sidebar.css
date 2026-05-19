@@ -1,0 +1,98 @@
+/* ─── SIDEBAR ─────────────────────────────── */
+
+
+.sidebar-menu {
+    @apply
+        flex
+        flex-col
+        gap-5;
+}
+
+
+.sidebar-active {
+    @apply
+    bg-green-400
+    text-black
+    shadow-lg
+    hover:bg-green-400
+    hover:text-black;
+}
+
+.sidebar {
+    @apply
+        bg-black/70
+        border-r
+        border-white/15
+        flex
+        flex-col
+        py-6
+        fixed
+        left-0
+        top-0
+        h-screen
+        z-50;
+
+    width: 90px;
+    transition: 0.3s;
+    overflow: hidden;
+}
+
+.sidebar.expanded {
+    width: 240px;
+}
+
+.sidebar-item {
+    @apply
+        h-14
+        rounded-xl
+        flex
+        items-center
+        text-white/50
+        transition
+        hover:text-white
+        hover:bg-white/10;
+
+    width: 100%;
+    padding-left: 35px;
+    gap: 14px;
+}
+.sidebar-item i {
+    @apply w-5 flex justify-center items-center text-xl;
+}
+.sidebar-text {
+    display: none; /* Sembunyikan total saat menu menciut */
+    white-space: nowrap;
+    transition: 0.2s;
+}
+
+.sidebar.expanded .sidebar-item {
+    /* Sesuaikan padding kiri saat sidebar melebar agar teks tidak terlalu menempel ke tepi */
+    padding-left: 24px; 
+}
+
+.sidebar.expanded .sidebar-text {
+    display: inline-block;;
+}
+
+.menu-toggle {
+    width: 100%;
+    display: flex;
+    justify-content: start;
+    padding-left: 35px; 
+    margin-bottom: 3rem;
+
+    color: rgba(255,255,255,0.6);
+    cursor: pointer;
+    transition: 0.3s;
+}
+.menu-toggle i {
+    @apply w-5 flex justify-center items-center text-xl;
+    margin: 0;
+}
+.menu-toggle:hover {
+    color: white;
+}
+
+.sidebar.expanded .menu-toggle {
+    padding-left: 24px; 
+}
