@@ -17,8 +17,8 @@
             </a>
         </li>
         <li>
-            <a href="#" 
-               class="sidebar-item {{ request()->routeIs('reports') ? 'sidebar-active' : '' }}">
+            <a href="{{ route('statistics') }}" 
+                class="sidebar-item {{ request()->routeIs('statistics') ? 'sidebar-active' : '' }}">
                 <i class="fa-solid fa-chart-bar text-xl"></i>
             </a>
         </li>
