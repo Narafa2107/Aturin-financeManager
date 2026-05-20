@@ -23,14 +23,14 @@
             </a>
         </li>
         <li>
-            <a href="{{ route('budget') }}" 
-               class="sidebar-item {{ request()->routeIs('budget') ? 'sidebar-active' : '' }}">
+            <a href="#" 
+               class="sidebar-item {{ request()->routeIs('insight') ? 'sidebar-active' : '' }}">
                 <i class="fa-solid fa-wallet text-xl"></i>
             </a>
         </li>
         <li>
-            <a href="#" 
-               class="sidebar-item {{ request()->routeIs('goals') ? 'sidebar-active' : '' }}">
+            <a href="{{ route('budget') }" 
+               class="sidebar-item {{ request()->routeIs('budget') ? 'sidebar-active' : '' }}">
                 <i class="fa-solid fa-bullseye text-xl"></i>
             </a>
         </li>
