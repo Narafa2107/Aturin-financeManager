@@ -1,0 +1,48 @@
+.budget-overview-card {
+    @apply 
+        bg-white 
+        text-black 
+        rounded-2xl 
+        p-6
+        border
+        border-white/10;
+}
+
+.category-budget-card {
+    @apply
+        bg-white
+        text-black
+        rounded-2xl
+        p-7
+        border
+        border-white/10;
+}
+
+.category-item-box {
+    @apply
+        border
+        border-gray-200
+        rounded-xl
+        p-4
+        bg-gray-50;
+}
+
+.history-section {
+    @apply
+        bg-white
+        text-black
+        rounded-2xl
+        p-7
+        border
+        border-white/10;
+}
+
+.history-placeholder {
+    @apply
+        h-[200px]
+        bg-gray-100
+        rounded-xl
+        border-2
+        border-dashed
+        border-gray-200;
+}
