@@ -13,3 +13,4 @@ Route::view('/transactions', 'transactions.transactions')->name('transactions');
 Route::view('/statistics', 'statistics.statistics')->name('statistics');
 
 Route::view('/budget', 'budget.budget')->name('budget');
+Route::view('/insights', 'insights.insights')->name('insights');

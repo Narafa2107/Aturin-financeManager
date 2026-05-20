@@ -2,5 +2,7 @@
 
 @import "./auth.css";
 @import "./dashboard.css";
-@import './transactions.css';
-@import './budget.css';
+@import "./transactions.css";
+@import "./budget.css";
+@import "./main-style.css";
+@import "./sidebar.css";

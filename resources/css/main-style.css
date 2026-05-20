@@ -9,55 +9,6 @@
 
 
 
-/* ─── SIDEBAR ─────────────────────────────── */
-
-.sidebar {
-    @apply
-        w-[90px]
-        bg-black/70
-        border-r
-        border-white/15
-        flex
-        flex-col
-        items-center
-        py-6
-        fixed  
-        left-0
-        top-0
-        h-screen
-        z-50;
-}
-
-.sidebar-menu {
-    @apply
-        flex
-        flex-col
-        gap-5;
-}
-
-.sidebar-item {
-    @apply
-        w-14
-        h-14
-        rounded-xl
-        flex
-        justify-center
-        items-center
-        text-white/50
-        transition
-        hover:text-white
-        hover:bg-white/10;
-}
-
-.sidebar-active {
-    @apply
-        bg-green-400
-        text-black
-        shadow-lg
-        hover:bg-green-400
-        hover:text-black;
-}
-
 
 
 /* ─── MAIN ────────────────────────────────── */
@@ -68,9 +19,10 @@
         p-8
         flex
         flex-col
-        overflow-y-auto
-        ml-[90px]; 
+        overflow-y-auto;
 
+    margin-left: 90px;
+    transition: 0.3s;
     gap: 1.5rem;
 }
 
@@ -81,6 +33,7 @@
         rounded-xl
         px-8
         py-5
+        
         bg-gradient-to-r
         from-white/10
         to-green-500/20;
@@ -154,7 +107,7 @@
 
 .budget-card {
     @apply
-        bg-gray-200;
+    bg-gray-200;
 }
 
 
@@ -303,4 +256,168 @@
         bg-purple-100
         rounded-xl
         p-5;
+}
+/* ─── ADDON: EXTRA BUTTONS ────────────────── */
+
+.export-btn {
+    @apply 
+        px-6 
+        py-3 
+        rounded-xl 
+        bg-white/10 
+        text-white 
+        font-semibold 
+        border 
+        border-white/20
+        transition 
+        hover:bg-white/20;
+}
+
+/* ─── ADDON: FILTER BAR ───────────────────── */
+
+.filter-card {
+    @apply 
+        bg-gray-100 
+        rounded-2xl 
+        p-6 
+        flex 
+        flex-col 
+        gap-4;
+}
+
+.filter-top {
+    @apply 
+        flex 
+        gap-4 
+        items-center;
+}
+
+.search-box {
+    @apply 
+        flex 
+        items-center 
+        gap-3 
+        bg-white 
+        border 
+        border-gray-200 
+        rounded-xl 
+        px-4 
+        py-2.5 
+        flex-1;
+}
+
+.search-input {
+    @apply 
+        w-full 
+        bg-transparent 
+        outline-none 
+        text-black 
+        text-sm;
+}
+
+.filter-select {
+    @apply 
+        bg-white 
+        border 
+        border-gray-200 
+        text-black 
+        text-sm 
+        rounded-xl 
+        px-4 
+        py-2.5 
+        outline-none 
+        cursor-pointer;
+}
+
+.filter-bottom {
+    @apply 
+        flex 
+        items-center 
+        gap-3;
+}
+
+.date-input {
+    @apply 
+        bg-white 
+        border 
+        border-gray-200 
+        text-black 
+        text-sm 
+        rounded-xl 
+        px-4 
+        py-2 
+        outline-none;
+}
+
+/* ─── ADDON: TRANSACTION TABLE ────────────── */
+
+.table-card {
+    @apply 
+        bg-gray-100 
+        rounded-2xl 
+        p-6 
+        overflow-x-auto;
+}
+
+.table-title {
+    @apply 
+        text-black 
+        font-bold 
+        text-lg 
+        mb-4;
+}
+
+.transaction-table {
+    @apply 
+        w-full 
+        text-left 
+        border-collapse;
+}
+
+.table-header-row {
+    @apply 
+        bg-gray-200/50 
+        text-gray-400 
+        text-xs;
+}
+
+.table-col-letter {
+    @apply 
+        px-4 
+        py-1 
+        font-normal;
+}
+
+.table-label-row {
+    @apply 
+        border-b 
+        border-gray-200 
+        text-black 
+        font-semibold 
+        text-sm;
+}
+
+.table-row {
+    @apply 
+        border-b 
+        border-gray-200/60 
+        text-gray-700 
+        text-sm 
+        hover:bg-gray-200/30 
+        transition;
+}
+
+.table-cell {
+    @apply 
+        px-4 
+        py-3.5;
+}
+
+.row-number {
+    @apply 
+        font-mono 
+        text-gray-400 
+        text-xs 
+        text-center 
+        w-10;
 }
