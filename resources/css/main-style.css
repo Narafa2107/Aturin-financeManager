@@ -1,21 +1,15 @@
 .dashboard-page {
-    @apply
-        min-h-screen
+    @apply min-h-screen
         bg-black
         text-white
         flex
         overflow-hidden;
 }
 
-
-
-
-
 /* ─── MAIN ────────────────────────────────── */
 
 .main-content {
-    @apply
-        flex-1
+    @apply flex-1
         p-8
         flex
         flex-col
@@ -27,8 +21,7 @@
 }
 
 .top-title {
-    @apply
-        border
+    @apply border
         border-white/20
         rounded-xl
         px-8
@@ -39,19 +32,15 @@
         to-green-500/20;
 }
 
-
-
 /* ─── BUTTONS ─────────────────────────────── */
 
 .action-group {
-    @apply
-        flex
+    @apply flex
         gap-4;
 }
 
 .income-btn {
-    @apply
-        px-6
+    @apply px-6
         py-3
         rounded-xl
         bg-green-400
@@ -62,8 +51,7 @@
 }
 
 .expense-btn {
-    @apply
-        px-6
+    @apply px-6
         py-3
         rounded-xl
         bg-white
@@ -73,50 +61,40 @@
         hover:bg-gray-100;
 }
 
-
-
 /* ─── SUMMARY CARDS ───────────────────────── */
 
 .summary-grid {
-    @apply
-        grid
+    @apply grid
         grid-cols-4
         gap-5;
 }
 
 .summary-card {
-    @apply
-        rounded-2xl
+    @apply rounded-2xl
         p-6
         text-black;
 }
 
 .income-card {
-    @apply
-        bg-gradient-to-br
+    @apply bg-gradient-to-br
         from-green-100
         to-green-300;
 }
 
 .expense-card {
-    @apply
-        bg-gradient-to-br
+    @apply bg-gradient-to-br
         from-red-100
         to-red-300;
 }
 
 .budget-card {
-    @apply
-    bg-gray-200;
+    @apply bg-gray-200;
 }
-
-
 
 /* ─── BUDGET ALERT ────────────────────────── */
 
 .budget-alert {
-    @apply
-        flex
+    @apply flex
         bg-yellow-50
         rounded-2xl
         overflow-hidden
@@ -125,67 +103,55 @@
 }
 
 .alert-side {
-    @apply
-        w-2
+    @apply w-2
         bg-yellow-400
         flex-shrink-0;
 }
 
 .alert-content {
-    @apply
-        px-6
+    @apply px-6
         py-4
         text-yellow-800;
 }
 
-
-
 /* ─── CHART + TRANSACTION ─────────────────── */
 
 .middle-grid {
-    @apply
-        grid
+    @apply grid
         grid-cols-2
         gap-6;
 }
 
 .chart-card,
 .transaction-card {
-    @apply
-        bg-gray-100
+    @apply bg-gray-100
         text-black
         rounded-2xl
         p-7;
 }
 
 .chart-placeholder {
-    @apply
-        h-[300px]
+    @apply h-[300px]
         bg-gray-200
         rounded-xl;
 }
 
-
-
 /* ─── TRANSACTION LIST ────────────────────── */
 
 .transaction-list {
-    @apply
-        flex
+    @apply flex
         flex-col
         gap-4;
 }
 
 .transaction-item {
-    @apply
-        flex
+    @apply flex
         items-center
         gap-4;
 }
 
 .transaction-icon {
-    @apply
-        w-11
+    @apply w-11
         h-11
         rounded-xl
         flex
@@ -196,14 +162,12 @@
 }
 
 .income-icon {
-    @apply
-        bg-green-200
+    @apply bg-green-200
         text-green-700;
 }
 
 .expense-icon {
-    @apply
-        bg-red-200
+    @apply bg-red-200
         text-red-600;
 }
 
@@ -212,56 +176,47 @@
 }
 
 .transaction-amount {
-    @apply
-        text-sm
+    @apply text-sm
         font-bold
         flex-shrink-0;
 }
 
-
-
 /* ─── MONTHLY INSIGHT ─────────────────────── */
 
 .insight-section {
-    @apply
-        bg-gray-100
+    @apply bg-gray-100
         text-black
         rounded-2xl
         p-7;
 }
 
 .insight-grid {
-    @apply
-        grid
+    @apply grid
         grid-cols-3
         gap-5;
 }
 
 .insight-red {
-    @apply
-        bg-red-100
+    @apply bg-red-100
         rounded-xl
         p-5;
 }
 
 .insight-green {
-    @apply
-        bg-green-100
+    @apply bg-green-100
         rounded-xl
         p-5;
 }
 
 .insight-purple {
-    @apply
-        bg-purple-100
+    @apply bg-purple-100
         rounded-xl
         p-5;
 }
 /* ─── ADDON: EXTRA BUTTONS ────────────────── */
 
 .export-btn {
-    @apply 
-        px-6 
+    @apply px-6 
         py-3 
         rounded-xl 
         bg-white/10 
@@ -276,8 +231,7 @@
 /* ─── ADDON: FILTER BAR ───────────────────── */
 
 .filter-card {
-    @apply 
-        bg-gray-100 
+    @apply bg-gray-100 
         rounded-2xl 
         p-6 
         flex 
@@ -286,15 +240,13 @@
 }
 
 .filter-top {
-    @apply 
-        flex 
+    @apply flex 
         gap-4 
         items-center;
 }
 
 .search-box {
-    @apply 
-        flex 
+    @apply flex 
         items-center 
         gap-3 
         bg-white 
@@ -307,8 +259,7 @@
 }
 
 .search-input {
-    @apply 
-        w-full 
+    @apply w-full 
         bg-transparent 
         outline-none 
         text-black 
@@ -316,8 +267,7 @@
 }
 
 .filter-select {
-    @apply 
-        bg-white 
+    @apply bg-white 
         border 
         border-gray-200 
         text-black 
@@ -330,15 +280,13 @@
 }
 
 .filter-bottom {
-    @apply 
-        flex 
+    @apply flex 
         items-center 
         gap-3;
 }
 
 .date-input {
-    @apply 
-        bg-white 
+    @apply bg-white 
         border 
         border-gray-200 
         text-black 
@@ -352,45 +300,39 @@
 /* ─── ADDON: TRANSACTION TABLE ────────────── */
 
 .table-card {
-    @apply 
-        bg-gray-100 
+    @apply bg-gray-100 
         rounded-2xl 
         p-6 
         overflow-x-auto;
 }
 
 .table-title {
-    @apply 
-        text-black 
+    @apply text-black 
         font-bold 
         text-lg 
         mb-4;
 }
 
 .transaction-table {
-    @apply 
-        w-full 
+    @apply w-full 
         text-left 
         border-collapse;
 }
 
 .table-header-row {
-    @apply 
-        bg-gray-200/50 
+    @apply bg-gray-200/50 
         text-gray-400 
         text-xs;
 }
 
 .table-col-letter {
-    @apply 
-        px-4 
+    @apply px-4 
         py-1 
         font-normal;
 }
 
 .table-label-row {
-    @apply 
-        border-b 
+    @apply border-b 
         border-gray-200 
         text-black 
         font-semibold 
@@ -398,8 +340,7 @@
 }
 
 .table-row {
-    @apply 
-        border-b 
+    @apply border-b 
         border-gray-200/60 
         text-gray-700 
         text-sm 
@@ -408,16 +349,58 @@
 }
 
 .table-cell {
-    @apply 
-        px-4 
+    @apply px-4 
         py-3.5;
 }
 
 .row-number {
-    @apply 
-        font-mono 
+    @apply font-mono 
         text-gray-400 
         text-xs 
         text-center 
         w-10;
+}
+
+.budget-overview-card {
+    @apply bg-white 
+        text-black 
+        rounded-2xl 
+        p-6
+        border
+        border-white/10;
+}
+
+.category-budget-card {
+    @apply bg-white
+        text-black
+        rounded-2xl
+        p-7
+        border
+        border-white/10;
+}
+
+.category-item-box {
+    @apply border
+        border-gray-200
+        rounded-xl
+        p-4
+        bg-gray-50;
+}
+
+.history-section {
+    @apply bg-white
+        text-black
+        rounded-2xl
+        p-7
+        border
+        border-white/10;
+}
+
+.history-placeholder {
+    @apply h-[200px]
+        bg-gray-100
+        rounded-xl
+        border-2
+        border-dashed
+        border-gray-200;
 }

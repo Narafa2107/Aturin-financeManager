@@ -1,6 +1,5 @@
 .login-page {
-    @apply
-        min-h-screen
+    @apply min-h-screen
         bg-black
         text-white
         flex
@@ -11,8 +10,7 @@
 }
 
 .glow-top {
-    @apply
-        absolute
+    @apply absolute
         top-0
         left-0
         w-[400px]
@@ -23,8 +21,7 @@
 }
 
 .glow-bottom {
-    @apply
-        absolute
+    @apply absolute
         bottom-0
         right-0
         w-[400px]
@@ -35,8 +32,7 @@
 }
 
 .login-card {
-    @apply
-        relative
+    @apply relative
         z-10
         w-[340px]
         bg-white/10
@@ -50,41 +46,35 @@
 }
 
 .login-logo {
-    @apply
-        flex
+    @apply flex
         justify-center
         mb-4;
 }
 
 .logo-img {
-    @apply
-        w-[90px];
+    @apply w-[90px];
 }
 
 .brand-title {
-    @apply
-        text-center
+    @apply text-center
         text-3xl
         font-bold
         mb-2;
 }
 
 .brand-subtitle {
-    @apply
-        text-center
+    @apply text-center
         text-gray-300
         mb-8;
 }
 
 .form-label {
-    @apply
-        block
+    @apply block
         mb-2;
 }
 
 .form-input {
-    @apply
-        w-full
+    @apply w-full
         px-4
         py-3
         rounded-xl
@@ -98,8 +88,7 @@
 }
 
 .login-btn {
-    @apply
-        w-full
+    @apply w-full
         bg-[#404DFF]
         py-3
         rounded-xl
@@ -109,8 +98,7 @@
 }
 
 .register-page {
-    @apply
-        min-h-screen
+    @apply min-h-screen
         bg-black
         text-white
         flex
@@ -122,8 +110,7 @@
 }
 
 .register-container {
-    @apply
-        relative
+    @apply relative
         z-10
         w-full
         max-w-6xl
@@ -134,33 +121,28 @@
 }
 
 .left-content {
-    @apply
-        max-w-md;
+    @apply max-w-md;
 }
 
 .left-logo {
-    @apply
-        w-24
+    @apply w-24
         mb-6;
 }
 
 .left-title {
-    @apply
-        text-5xl
+    @apply text-5xl
         font-bold
         leading-tight
         mb-5;
 }
 
 .left-description {
-    @apply
-        text-gray-300
+    @apply text-gray-300
         text-lg;
 }
 
 .register-card {
-    @apply
-        relative
+    @apply relative
         z-10
         w-[340px]
         bg-white/10
@@ -174,8 +156,7 @@
 }
 
 .register-btn {
-    @apply
-        w-full
+    @apply w-full
         bg-[#404DFF]
         py-3
         rounded-xl
