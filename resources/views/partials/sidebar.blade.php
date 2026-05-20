@@ -29,7 +29,7 @@
             </a>
         </li>
         <li>
-            <a href="{{ route('budget') }" 
+            <a href="{{ route('budget') }}" 
                class="sidebar-item {{ request()->routeIs('budget') ? 'sidebar-active' : '' }}">
                 <i class="fa-solid fa-bullseye text-xl"></i>
             </a>
