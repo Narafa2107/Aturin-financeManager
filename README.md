@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="./assets/logo.png" width="350" alt="Aturin Logo">
+  <img src="public/asset/logo.png" width="350" alt="Aturin Logo">
 </p>
 
 <h1 align="center">Aturin</h1>
