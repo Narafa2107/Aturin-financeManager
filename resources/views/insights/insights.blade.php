@@ -81,7 +81,7 @@
         <div style="display:flex; gap:16px; margin-top:8px; flex-wrap:wrap;">
 
                 <!-- Optimize Expenses -->
-                <div style="background:#daeefe; border-radius:12px; padding:20px 22px; border-top:4px solid #3a9fd4;">
+                <div style="background:#daeefe; border-radius:12px; padding:20px 22px; border-top:4px solid #3a9fd4; flex:1; min-width:280px;">
                     <div class="flex justify-between items-start">
                         <p class="text-sm font-semibold" style="color:#1868a0;">Optimize expenses</p>
                         <i class="fa-solid fa-sliders" style="color:#3a9fd4; font-size:1.1rem;"></i>
@@ -90,7 +90,7 @@
                 </div>
 
                 <!-- Allocate Profits -->
-                <div style="background:#e4f8ec; border-radius:12px; padding:20px 22px; border-top:4px solid #30d46e;">
+                <div style="background:#e4f8ec; border-radius:12px; padding:20px 22px; border-top:4px solid #30d46e;flex:1; min-width:280px;">
                     <div class="flex justify-between items-start">
                         <p class="text-sm font-semibold" style="color:#148040;">Allocate Profits</p>
                         <i class="fa-solid fa-layer-group" style="color:#30d46e; font-size:1.1rem;"></i>
