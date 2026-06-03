@@ -1,16 +1,37 @@
 <?php
 
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
-Route::view('/', 'auth.login')->name('login');
+Route::get('/', function () {
+    return view('auth.login');
+});
 
-Route::view('/register', 'auth.register')->name('register');
+Route::middleware('auth')->group(function () {
 
-Route::view('/dashboard', 'dashboard.dashboard')->name('dashboard');
+    Route::get('/dashboard', function () {
+        return view('dashboard.dashboard');
+    })->name('dashboard');
 
-Route::view('/transactions', 'transactions.transactions')->name('transactions');
+    Route::get('/insights', function () {
+        return view('insights.insights');
+    })->name('insights');
 
-Route::view('/statistics', 'statistics.statistics')->name('statistics');
+    Route::get('/statistics', function () {
+        return view('statistics.statistics');
+    })->name('statistics');
 
-Route::view('/budget', 'budget.budget')->name('budget');
-Route::view('/insights', 'insights.insights')->name('insights');
+    Route::get('/transactions', function () {
+        return view('transactions.transactions');
+    })->name('transactions');
+    
+    Route::get('/budget', function () {
+    return view('budget.budget');
+    })->name('budget');
+
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+require __DIR__.'/auth.php';

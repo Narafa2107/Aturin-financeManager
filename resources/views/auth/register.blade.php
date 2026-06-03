@@ -1,21 +1,11 @@
-@extends('layouts.app')
+<x-guest-layout>
+    <div class="register-page">
+        <div class="glow-top"></div>
+        <div class="glow-bottom"></div>
 
-@section('content')
-
-<div class="register-page">
-
-    <div class="glow-top"></div>
-
-    <div class="glow-bottom"></div>
-
-
-
+```
     <div class="register-container">
-
-        <!-- LEFT -->
-
         <div class="left-content">
-
             <img
                 src="{{ asset('asset/logo.png') }}"
                 alt="Aturin Logo"
@@ -23,124 +13,105 @@
             >
 
             <h1 class="left-title">
-
                 Welcome to <br>
                 Aturin.
-
             </h1>
 
             <p class="left-description">
-
                 A system that lets you plan your business activities efficiently.
-
             </p>
-
         </div>
-
-
-
-        <!-- REGISTER CARD -->
 
         <div class="register-card">
 
-            <form>
+            @if ($errors->any())
+                <div class="mb-4 text-red-400">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
+            <form method="POST" action="{{ route('register') }}">
+                @csrf
 
                 <div class="mb-4">
-
                     <label class="form-label">
                         Username
                     </label>
 
                     <input
                         type="text"
+                        name="name"
+                        value="{{ old('name') }}"
                         placeholder="Enter your username"
-                        class="form-input"
+                        class="auth-input"
+                        required
                     >
-
                 </div>
 
-
-
                 <div class="mb-4">
-
                     <label class="form-label">
                         Email
                     </label>
 
                     <input
                         type="email"
+                        name="email"
+                        value="{{ old('email') }}"
                         placeholder="Enter your email"
-                        class="form-input"
+                        class="auth-input"
+                        required
                     >
-
                 </div>
 
-
-
                 <div class="mb-4">
-
                     <label class="form-label">
                         Password
                     </label>
 
                     <input
                         type="password"
+                        name="password"
                         placeholder="Enter your password"
-                        class="form-input"
+                        class="auth-input"
+                        required
                     >
-
                 </div>
 
-
-
                 <div class="mb-6">
-
                     <label class="form-label">
                         Confirm Password
                     </label>
 
                     <input
                         type="password"
+                        name="password_confirmation"
                         placeholder="Confirm your password"
-                        class="form-input"
+                        class="auth-input"
+                        required
                     >
-
                 </div>
-
-
 
                 <button
                     type="submit"
                     class="register-btn"
                 >
-
                     Register
-
                 </button>
-
             </form>
 
-
-
             <div class="text-center mt-5">
-
                 Sudah punya akun?
-
-                <a
-                    href="/"
-                    class="underline ml-1"
-                >
-
+                <a href="{{ route('login') }}" class="underline ml-1">
                     Login
-
                 </a>
-
             </div>
-
         </div>
-
     </div>
-
 </div>
+```
 
-@endsection
+</x-guest-layout>
