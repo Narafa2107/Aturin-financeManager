@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\BudgetController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -25,10 +26,10 @@ Route::middleware('auth')->group(function () {
         return view('transactions.transactions');
     })->name('transactions');
     
-    Route::get('/budget', function () {
-    return view('budget.budget');
-    })->name('budget');
-
+    Route::get('/budget', [BudgetController::class, 'index'])->name('budget');
+    Route::post('/budget', [BudgetController::class, 'store'])->name('budget.store');
+    Route::post('/budget/source', [BudgetController::class, 'storeSource'])->name('budget.storeSource');
+    
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');

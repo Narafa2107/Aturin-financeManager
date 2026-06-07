@@ -8,61 +8,124 @@
     <main class="main-content">
 
         <div class="top-title">
-            <h1 class="text-4xl font-bold text-white">Budget</h1>
+            <h1 class="text-4xl font-bold text-white">Budget Management</h1>
         </div>
 
-        <div class="action-group">
-            <button class="income-btn"> <i class="fa-solid fa-plus mr-2"></i> Add Budget
+        <div class="action-group flex flex-wrap gap-3 mb-6">
+            <button id="openAllocateBtn" class="income-btn !bg-blue-600 hover:!bg-blue-500 text-white" onclick="toggleModal('allocateModal', true)"> 
+                <i class="fa-solid fa-pie-chart mr-2"></i> Allocate Budget
+            </button>
+
+            <button id="openSourceBtn" class="income-btn !bg-green-600 hover:!bg-green-500 text-white" onclick="toggleModal('sourceModal', true)"> 
+                <i class="fa-solid fa-wallet mr-2"></i> Add New Budget Source
             </button>
         </div>
 
-        <div class="summary-card budget-overview-card shadow-lg">
-            <div class="flex justify-between items-center mb-2">
-                <h3 class="text-lg font-bold text-gray-800">May 2026 Budget</h3>
-                <span class="text-xs text-gray-500 font-semibold">67.8% used</span>
-            </div>
-            
-            <div class="grid grid-cols-3 gap-4 my-4">
-                <div class="p-3 bg-green-50/60 rounded-xl border border-green-100">
-                    <p class="text-xs text-gray-500 font-medium">Total Budget</p>
-                    <p class="text-xl font-bold text-green-700 mt-1">Rp 13.000.000</p>
+        <div id="allocateModal" class="fixed inset-0 z-50 hidden bg-black/50 flex items-center justify-center p-4 backdrop-blur-sm">
+            <div class="bg-gray-800 border border-gray-700 rounded-2xl w-full max-w-md p-6 shadow-2xl text-left">
+                <div class="flex justify-between items-center mb-4 pb-2 border-b border-gray-700">
+                    <h3 class="text-xl font-bold text-white">Allocate Budget to Category</h3>
+                    <button onclick="toggleModal('allocateModal', false)" class="text-gray-400 hover:text-white transition text-lg">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
                 </div>
-                <div class="p-3 bg-red-50/60 rounded-xl border border-red-100">
-                    <p class="text-xs text-gray-500 font-medium">Total Spent</p>
-                    <p class="text-xl font-bold text-red-700 mt-1">Rp 12.231.420</p>
-                </div>
-                <div class="p-3 bg-gray-50 rounded-xl border border-gray-200">
-                    <p class="text-xs text-gray-500 font-medium">Remaining</p>
-                    <p class="text-xl font-bold text-gray-700 mt-1">Rp 4.000.000</p>
-                </div>
-            </div>
 
-            <div class="w-full bg-gray-200 h-3 rounded-full overflow-hidden mt-3">
-                <div class="bg-green-500 h-full rounded-full" style="width: 67.8%"></div>
+                <form action="{{ route('budget.store') }}" method="POST">
+                    @csrf 
+                    <div class="mb-4">
+                        <label class="block text-xs font-semibold text-gray-400 uppercase mb-2">Category</label>
+                        <select name="category_name" required class="w-full bg-gray-950 border border-gray-700 rounded-xl px-3 py-2 text-white focus:outline-none focus:border-blue-500">
+                            <option value="" disabled selected>Select Category</option>
+                            <option value="Marketing">Marketing</option>
+                            <option value="Operations">Operations</option>
+                            <option value="Technology">Technology</option>
+                            <option value="Salaries">Salaries</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-6">
+                        <label class="block text-xs font-semibold text-gray-400 uppercase mb-2">Amount to Allocate (Rp)</label>
+                        <input type="number" name="allocated_amount" min="1000" required placeholder="e.g. 5000000"
+                            class="w-full bg-gray-950 border border-gray-700 rounded-xl px-3 py-2 text-white focus:outline-none focus:border-blue-500">
+                    </div>
+
+                    <div class="flex justify-end gap-3">
+                        <button type="button" onclick="toggleModal('allocateModal', false)" class="px-4 py-2 bg-gray-700 text-white rounded-xl hover:bg-gray-600 transition text-sm font-semibold">Cancel</button>
+                        <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-xl hover:bg-blue-500 transition text-sm font-semibold shadow-lg shadow-blue-900/30">Save Allocation</button>
+                    </div>
+                </form>
             </div>
-            <p class="text-xs text-gray-400 mt-2">20 days remaining in May 2026</p>
         </div>
 
-        <div class="flex flex-col gap-3">
+        <div id="sourceModal" class="fixed inset-0 z-50 hidden bg-black/50 flex items-center justify-center p-4 backdrop-blur-sm">
+            <div class="bg-gray-800 border border-gray-700 rounded-2xl w-full max-w-md p-6 shadow-2xl text-left">
+                <div class="flex justify-between items-center mb-4 pb-2 border-b border-gray-700">
+                    <h3 class="text-xl font-bold text-white">Add Budget Source / Capital</h3>
+                    <button onclick="toggleModal('sourceModal', false)" class="text-gray-400 hover:text-white transition text-lg">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+
+                <form action="{{ route('budget.storeSource') }}" method="POST">
+                    @csrf 
+                    <div class="mb-4">
+                        <label class="block text-xs font-semibold text-gray-400 uppercase mb-2">Source Type</label>
+                        <select name="source_name" required class="w-full bg-gray-950 border border-gray-700 rounded-xl px-3 py-2 text-white focus:outline-none focus:border-green-500">
+                            <option value="" disabled selected>Select Source</option>
+                            <option value="Asset">Asset / Modal Sendiri</option>
+                            <option value="Loan">Pinjaman / Hutang</option>
+                            <option value="Other">Lainnya</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-6">
+                        <label class="block text-xs font-semibold text-gray-400 uppercase mb-2">Amount (Rp)</label>
+                        <input type="number" name="amount" min="1000" required placeholder="e.g. 50000000"
+                            class="w-full bg-gray-950 border border-gray-700 rounded-xl px-3 py-2 text-white focus:outline-none focus:border-green-500">
+                    </div>
+
+                    <div class="flex justify-end gap-3">
+                        <button type="button" onclick="toggleModal('sourceModal', false)" class="px-4 py-2 bg-gray-700 text-white rounded-xl hover:bg-gray-600 transition text-sm font-semibold">Cancel</button>
+                        <button type="submit" class="px-4 py-2 bg-green-600 text-white rounded-xl hover:bg-green-500 transition text-sm font-semibold shadow-lg shadow-green-900/30">Add Source</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 my-4">
+            <div class="p-4 bg-gray-800 rounded-xl border border-gray-700 shadow-md">
+                <p class="text-xs text-gray-400 font-medium uppercase tracking-wider">Total Assets</p>
+                <p class="text-xl font-bold text-white mt-1">Rp {{ number_format($totalAssets, 0, ',', '.') }}</p>
+                <p class="text-[10px] text-gray-500 mt-1">Capital + Profit (Real Cash)</p>
+            </div>
+            
+            <div class="p-4 bg-gray-800 rounded-xl border border-gray-700 shadow-md">
+                <p class="text-xs text-gray-400 font-medium uppercase tracking-wider">Unallocated Funds</p>
+                <p class="text-xl font-bold text-amber-500 mt-1">Rp {{ number_format($unallocatedFunds, 0, ',', '.') }}</p>
+                <p class="text-[10px] text-gray-500 mt-1">Available to allocate to category</p>
+            </div>
+
+            <div class="p-4 bg-gray-800 rounded-xl border border-gray-700 shadow-md">
+                <p class="text-xs text-gray-400 font-medium uppercase tracking-wider">Total Allocated</p>
+                <p class="text-xl font-bold text-blue-500 mt-1">Rp {{ number_format($totalAllocated, 0, ',', '.') }}</p>
+                <p class="text-[10px] text-gray-500 mt-1">Total jatah budget divisi</p>
+            </div>
+            
+            <div class="p-4 bg-gray-800 rounded-xl border border-gray-700 shadow-md">
+                <p class="text-xs text-gray-400 font-medium uppercase tracking-wider">Total Remaining Budget</p>
+                <p class="text-xl font-bold text-green-500 mt-1">Rp {{ number_format($totalRemaining, 0, ',', '.') }}</p>
+                <p class="text-[10px] text-gray-500 mt-1">Total Allocated - Total Expense</p>
+            </div>
+        </div>
+
+        <div class="flex flex-col gap-3 my-4">
             <div class="budget-alert !border-red-200">
                 <div class="alert-side !bg-red-500"></div>
-                
                 <div class="alert-content !text-red-800 !bg-red-50/50 w-full flex items-center gap-3">
                     <i class="fa-solid fa-circle-exclamation text-lg text-red-500"></i>
                     <div>
                         <p class="font-bold text-sm">Over Budget Alert</p>
                         <p class="text-sm mt-0.5">Marketing category is at 95.4% of allocated budget. Immediate action recommended. Approaching Limit</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="budget-alert">
-                <div class="alert-side bg-yellow-400"></div>
-                <div class="alert-content flex items-center gap-3 w-full">
-                    <i class="fa-solid fa-clock text-lg text-yellow-600"></i>
-                    <div>
-                        <p class="font-bold text-sm">Approaching Limit</p>
-                        <p class="text-sm mt-0.5">Operations spending at 89.5% - monitor closely for the remainder of the month.</p>
                     </div>
                 </div>
             </div>
@@ -72,93 +135,52 @@
             <h3 class="text-lg font-bold mb-5">Budget by Category</h3>
             
             <div class="flex flex-col gap-6">
-                <div class="category-item-box">
-                    <div class="flex justify-between items-center mb-2">
-                        <div class="flex items-center gap-2">
-                            <span class="w-2 h-2 rounded-full bg-red-500"></span>
-                            <span class="font-bold text-sm">Marketing</span>
+                @forelse($budgets as $budget)
+                    <div class="category-item-box">
+                        <div class="flex justify-between items-center mb-2">
+                            <div class="flex items-center gap-2">
+                                @if($budget->category_name == 'Marketing')
+                                    <span class="w-2 h-2 rounded-full bg-red-500"></span>
+                                @elseif($budget->category_name == 'Operations')
+                                    <span class="w-2 h-2 rounded-full bg-blue-500"></span>
+                                @elseif($budget->category_name == 'Technology')
+                                    <span class="w-2 h-2 rounded-full bg-purple-500"></span>
+                                @else
+                                    <span class="w-2 h-2 rounded-full bg-yellow-500"></span>
+                                @endif
+                                
+                                <span class="font-bold text-sm">{{ $budget->category_name }}</span>
+                            </div>
+                            
                         </div>
-                        <button class="text-gray-400 hover:text-black transition"><i class="fa-solid fa-pen text-xs"></i></button>
-                    </div>
-                    <div class="grid grid-cols-3 gap-3 text-center mb-2">
-                        <div class="bg-blue-50 p-2 rounded-lg"><p class="text-[10px] text-blue-600 font-bold uppercase">Allocated</p><p class="text-xs font-bold text-blue-900 mt-0.5">Rp 13.000.000</p></div>
-                        <div class="bg-purple-50 p-2 rounded-lg"><p class="text-[10px] text-purple-600 font-bold uppercase">Spent</p><p class="text-xs font-bold text-purple-900 mt-0.5">Rp 12.231.420</p></div>
-                        <div class="bg-green-50 p-2 rounded-lg"><p class="text-[10px] text-green-600 font-bold uppercase">Remaining</p><p class="text-xs font-bold text-green-900 mt-0.5">Rp 4.000.000</p></div>
-                    </div>
-                    <div class="w-full bg-gray-100 h-2 rounded-full overflow-hidden">
-                        <div class="bg-red-600 h-full" style="width: 95%"></div>
-                    </div>
-                    <div class="flex justify-between items-center mt-1 text-[11px]">
-                        <span class="text-gray-500 font-medium">95% used</span>
-                        <span class="text-red-600 font-bold"><i class="fa-solid fa-triangle-exclamation mr-1"></i>Over budget risk</span>
-                    </div>
-                </div>
-
-                <div class="category-item-box">
-                    <div class="flex justify-between items-center mb-2">
-                        <div class="flex items-center gap-2">
-                            <span class="w-2 h-2 rounded-full bg-blue-500"></span>
-                            <span class="font-bold text-sm">Operations</span>
+                        <div class="grid grid-cols-3 gap-3 text-center mb-2">
+                            <div class="bg-blue-50 p-2 rounded-lg">
+                                <p class="text-[10px] text-blue-600 font-bold uppercase">Allocated</p>
+                                <p class="text-xs font-bold text-blue-900 mt-0.5">Rp {{ number_format($budget->allocated_amount, 0, ',', '.') }}</p>
+                            </div>
+                            <div class="bg-purple-50 p-2 rounded-lg">
+                                <p class="text-[10px] text-purple-600 font-bold uppercase">Spent</p>
+                                <p class="text-xs font-bold text-purple-900 mt-0.5">Rp 0</p>
+                            </div>
+                            <div class="bg-green-50 p-2 rounded-lg">
+                                <p class="text-[10px] text-green-600 font-bold uppercase">Remaining</p>
+                                <p class="text-xs font-bold text-green-900 mt-0.5">Rp {{ number_format($budget->allocated_amount, 0, ',', '.') }}</p>
+                            </div>
                         </div>
-                        <button class="text-gray-400 hover:text-black transition"><i class="fa-solid fa-pen text-xs"></i></button>
-                    </div>
-                    <div class="grid grid-cols-3 gap-3 text-center mb-2">
-                        <div class="bg-blue-50 p-2 rounded-lg"><p class="text-[10px] text-blue-600 font-bold uppercase">Allocated</p><p class="text-xs font-bold text-blue-900 mt-0.5">Rp 13.000.000</p></div>
-                        <div class="bg-purple-50 p-2 rounded-lg"><p class="text-[10px] text-purple-600 font-bold uppercase">Spent</p><p class="text-xs font-bold text-purple-900 mt-0.5">Rp 12.231.420</p></div>
-                        <div class="bg-green-50 p-2 rounded-lg"><p class="text-[10px] text-green-600 font-bold uppercase">Remaining</p><p class="text-xs font-bold text-green-900 mt-0.5">Rp 4.000.000</p></div>
-                    </div>
-                    <div class="w-full bg-gray-100 h-2 rounded-full overflow-hidden">
-                        <div class="bg-blue-600 h-full" style="width: 89%"></div>
-                    </div>
-                    <div class="flex justify-between items-center mt-1 text-[11px]">
-                        <span class="text-gray-500 font-medium">89% used</span>
-                        <span class="text-yellow-600 font-bold">On track</span>
-                    </div>
-                </div>
-
-                <div class="category-item-box">
-                    <div class="flex justify-between items-center mb-2">
-                        <div class="flex items-center gap-2">
-                            <span class="w-2 h-2 rounded-full bg-purple-500"></span>
-                            <span class="font-bold text-sm">Technology</span>
+                        <div class="w-full bg-gray-100 h-2 rounded-full overflow-hidden">
+                            <div class="bg-blue-600 h-full" style="width: 0%"></div>
                         </div>
-                        <button class="text-gray-400 hover:text-black transition"><i class="fa-solid fa-pen text-xs"></i></button>
-                    </div>
-                    <div class="grid grid-cols-3 gap-3 text-center mb-2">
-                        <div class="bg-blue-50 p-2 rounded-lg"><p class="text-[10px] text-blue-600 font-bold uppercase">Allocated</p><p class="text-xs font-bold text-blue-900 mt-0.5">Rp 13.000.000</p></div>
-                        <div class="bg-purple-50 p-2 rounded-lg"><p class="text-[10px] text-purple-600 font-bold uppercase">Spent</p><p class="text-xs font-bold text-purple-900 mt-0.5">Rp 12.231.420</p></div>
-                        <div class="bg-green-50 p-2 rounded-lg"><p class="text-[10px] text-green-600 font-bold uppercase">Remaining</p><p class="text-xs font-bold text-green-900 mt-0.5">Rp 4.000.000</p></div>
-                    </div>
-                    <div class="w-full bg-gray-100 h-2 rounded-full overflow-hidden">
-                        <div class="bg-purple-600 h-full" style="width: 77%"></div>
-                    </div>
-                    <div class="flex justify-between items-center mt-1 text-[11px]">
-                        <span class="text-gray-500 font-medium">77% used</span>
-                        <span class="text-yellow-600 font-bold">On track</span>
-                    </div>
-                </div>
-
-                <div class="category-item-box">
-                    <div class="flex justify-between items-center mb-2">
-                        <div class="flex items-center gap-2">
-                            <span class="w-2 h-2 rounded-full bg-yellow-500"></span>
-                            <span class="font-bold text-sm">Salaries</span>
+                        <div class="flex justify-between items-center mt-1 text-[11px]">
+                            <span class="text-gray-500 font-medium">0% used</span>
+                            <span class="text-green-600 font-bold">Well under budget</span>
                         </div>
-                        <button class="text-gray-400 hover:text-black transition"><i class="fa-solid fa-pen text-xs"></i></button>
                     </div>
-                    <div class="grid grid-cols-3 gap-3 text-center mb-2">
-                        <div class="bg-blue-50 p-2 rounded-lg"><p class="text-[10px] text-blue-600 font-bold uppercase">Allocated</p><p class="text-xs font-bold text-blue-900 mt-0.5">Rp 13.000.000</p></div>
-                        <div class="bg-purple-50 p-2 rounded-lg"><p class="text-[10px] text-purple-600 font-bold uppercase">Spent</p><p class="text-xs font-bold text-purple-900 mt-0.5">Rp 12.231.420</p></div>
-                        <div class="bg-green-50 p-2 rounded-lg"><p class="text-[10px] text-green-600 font-bold uppercase">Remaining</p><p class="text-xs font-bold text-green-900 mt-0.5">Rp 4.000.000</p></div>
+                @empty
+                    <div class="p-6 bg-gray-800 text-center rounded-xl text-gray-400 border border-dashed border-gray-700">
+                        <i class="fa-solid fa-folder-open text-3xl opacity-30 mb-2"></i>
+                        <p class="text-sm">No budget categories allocated yet. Please click "Allocate Budget".</p>
                     </div>
-                    <div class="w-full bg-gray-100 h-2 rounded-full overflow-hidden">
-                        <div class="bg-yellow-500 h-full" style="width: 30%"></div>
-                    </div>
-                    <div class="flex justify-between items-center mt-1 text-[11px]">
-                        <span class="text-gray-500 font-medium">30% used</span>
-                        <span class="text-green-600 font-bold">Well under budget</span>
-                    </div>
-                </div>
+                @endforelse
             </div>
         </div>
 
@@ -173,5 +195,16 @@
 
     </main>
 </div>
+
+<script>
+    function toggleModal(modalId, show) {
+        const modal = document.getElementById(modalId);
+        if (show) {
+            modal.classList.remove('hidden');
+        } else {
+            modal.classList.add('hidden');
+        }
+    }
+</script>
 
 @endsection
