@@ -50,7 +50,7 @@ class AIInsightService
         - budget maksimal 20 kata
         - expenses maksimal 20 kata
         - berikan tepat 2 strategic recommendations
-        - recommendation title maksimal 6 kata
+        - recommendation title maksimal 3 kata
         - recommendation content maksimal 25 kata
         - gunakan bahasa Indonesia profesional
         - jangan gunakan markdown
