@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\InsightController;
 
 Route::get('/', function () {
     return view('auth.login');
@@ -13,9 +14,8 @@ Route::middleware('auth')->group(function () {
         return view('dashboard.dashboard');
     })->name('dashboard');
 
-    Route::get('/insights', function () {
-        return view('insights.insights');
-    })->name('insights');
+    Route::get('/insights', [InsightController::class, 'index'])
+    ->name('insights');
 
     Route::get('/statistics', function () {
         return view('statistics.statistics');
