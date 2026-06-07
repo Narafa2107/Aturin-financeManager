@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Budget;
 use App\Models\BudgetSource;
-// use App\Models\Transaction; // <-- Buka komen ini jika model transaksi temanmu sudah jadi
+use App\Models\Transaction; 
 
 class BudgetController extends Controller
 {
