@@ -10,41 +10,53 @@ use App\Models\BudgetSource;
 class BudgetController extends Controller
 {
     /**
-     * Menampilkan Dashboard Budget dengan Perhitungan 4 Card Utama
+     * Menampilkan Dashboard Budget dengan Perhitungan Akurat Terintegrasi
      */
     public function index()
     {
         $userId = auth()->id();
 
-        // 1. Ambil data alokasi budget kategori milik user
-        $budgets = Budget::where('user_id', $userId)->get();
+        // 1. Ambil data alokasi jatah anggaran kategori milik user
+        $rawBudgets = Budget::where('user_id', $userId)->get();
 
-        // 2. HITUNG TOTAL SUMBER DANA (Dari tabel budget_sources yang baru dibuat)
+        // 2. HITUNG TOTAL SUMBER DANA / MODAL ASET
         $totalSource = BudgetSource::where('user_id', $userId)->sum('amount');
 
-        // 3. AMBIL DATA TRANSAKSI PEMASUKAN & PENGELUARAN (Dari tabel temanmu)
-        // Sementara di-set 0 dulu agar tidak error jika tabel temanmu belum selesai koding
-        $totalIncome = 0; 
-        $totalExpense = 0;
+        // 3. HITUNG TOTAL TRANSAKSI GLOBAL (PEMASUKAN & PENGELUARAN)
+        $totalIncome = Transaction::where('user_id', $userId)->where('type', 'income')->sum('amount');
+        $totalExpense = Transaction::where('user_id', $userId)->where('type', 'expense')->sum('amount');
 
-        // JIKA TABEL TEMANMU SUDAH JADI, hapus angka 0 di atas dan aktifkan kode di bawah ini:
-        // $totalIncome = Transaction::where('user_id', $userId)->where('type', 'income')->sum('amount');
-        // $totalExpense = Transaction::where('user_id', $userId)->where('type', 'expense')->sum('amount');
-
-        // 4. HITUNG RUMUS 4 CARD UTAMA SESUAI KESEPAKATAN
-        // Card 1: Total Assets (Uang kas nyata saat ini)
+        // 4. HITUNG RUMUS 4 CARD UTAMA SEJAJAR
         $totalAssets = $totalSource + ($totalIncome - $totalExpense);
-
-        // Card 3: Total Allocated (Total jatah anggaran yang sudah disebar ke kategori)
         $totalAllocated = Budget::where('user_id', $userId)->sum('allocated_amount');
-
-        // Card 2: Unallocated Funds (Sisa uang nyata yang masih bebas dialokasikan ke kategori)
         $unallocatedFunds = $totalAssets - $totalAllocated;
-
-        // Card 4: Total Remaining Budget (Sisa jatah jatah anggaran global yang belum dibelanjakan)
         $totalRemaining = $totalAllocated - $totalExpense;
 
-        // 5. Lempar semua variabel perhitungan ke halaman Blade
+        // 5. LOGIKA INTEGRASI: Hitung pengeluaran per kategori divisi secara otomatis
+        $budgets = $rawBudgets->map(function ($budget) use ($userId) {
+            // Hitung total expense yang dilakukan oleh user ini untuk kategori spesifik ini
+            $categorySpent = Transaction::where('user_id', $userId)
+                ->where('type', 'expense')
+                ->where('category', $budget->category_name)
+                ->sum('amount');
+
+            // Hitung sisa budget untuk kategori ini
+            $categoryRemaining = $budget->allocated_amount - $categorySpent;
+
+            // Hitung persentase pemakaian untuk kemajuan progress bar (maksimal 100%)
+            $percentageUsed = $budget->allocated_amount > 0 
+                ? min(($categorySpent / $budget->allocated_amount) * 100, 100) 
+                : 0;
+
+            // Masukkan variabel baru ini sebagai properti objek budget agar bisa dibaca di Blade
+            $budget->spent = $categorySpent;
+            $budget->remaining = $categoryRemaining;
+            $budget->percentage_used = $percentageUsed;
+
+            return $budget;
+        });
+
+        // 6. Lempar semua variabel perhitungan ke halaman Blade
         return view('budget.budget', compact(
             'budgets', 
             'totalAssets', 
@@ -56,7 +68,7 @@ class BudgetController extends Controller
     }
 
     /**
-     * Logika Modal 1: Allocate Budget (Sistem Top-Up Akumulasi Kategori Bulan Ini)
+     * Logika Modal 1: Allocate Budget (Sistem Top-Up)
      */
     public function store(Request $request)
     {
@@ -66,20 +78,17 @@ class BudgetController extends Controller
         ]);
 
         $userId = auth()->id();
-        $currentMonthYear = date('Y-m'); // Otomatis mengunci ke bulan berjalan saat ini
+        $currentMonthYear = date('Y-m'); 
 
-        // Cari tahu apakah kategori tersebut sudah pernah diinput bulan ini
         $existingBudget = Budget::where('user_id', $userId)
                                 ->where('category_name', $request->category_name)
                                 ->where('month_year', $currentMonthYear)
                                 ->first();
 
         if ($existingBudget) {
-            // JIKA SUDAH ADA: Nominalnya ditambahkan (Sistem Top-Up)
             $existingBudget->allocated_amount += $request->allocated_amount;
             $existingBudget->save();
         } else {
-            // JIKA BELUM ADA: Buat kotak kategori baru
             Budget::create([
                 'user_id' => $userId,
                 'category_name' => $request->category_name,
@@ -92,7 +101,7 @@ class BudgetController extends Controller
     }
 
     /**
-     * Logika Modal 2: Add New Budget Source (Menyimpan Sumber Dana / Modal Baru)
+     * Logika Modal 2: Add New Budget Source
      */
     public function storeSource(Request $request)
     {
@@ -101,7 +110,6 @@ class BudgetController extends Controller
             'amount' => 'required|numeric|min:1000',
         ]);
 
-        // Simpan ke tabel budget_sources
         BudgetSource::create([
             'user_id' => auth()->id(),
             'source_name' => $request->source_name,

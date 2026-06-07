@@ -151,28 +151,37 @@
                                 
                                 <span class="font-bold text-sm">{{ $budget->category_name }}</span>
                             </div>
-                            
                         </div>
+
                         <div class="grid grid-cols-3 gap-3 text-center mb-2">
                             <div class="bg-blue-50 p-2 rounded-lg">
                                 <p class="text-[10px] text-blue-600 font-bold uppercase">Allocated</p>
                                 <p class="text-xs font-bold text-blue-900 mt-0.5">Rp {{ number_format($budget->allocated_amount, 0, ',', '.') }}</p>
                             </div>
+                            
                             <div class="bg-purple-50 p-2 rounded-lg">
                                 <p class="text-[10px] text-purple-600 font-bold uppercase">Spent</p>
-                                <p class="text-xs font-bold text-purple-900 mt-0.5">Rp 0</p>
+                                <p class="text-xs font-bold text-purple-900 mt-0.5">Rp {{ number_format($budget->spent, 0, ',', '.') }}</p>
                             </div>
+                            
                             <div class="bg-green-50 p-2 rounded-lg">
                                 <p class="text-[10px] text-green-600 font-bold uppercase">Remaining</p>
-                                <p class="text-xs font-bold text-green-900 mt-0.5">Rp {{ number_format($budget->allocated_amount, 0, ',', '.') }}</p>
+                                <p class="text-xs font-bold text-green-900 mt-0.5">Rp {{ number_format($budget->remaining, 0, ',', '.') }}</p>
                             </div>
                         </div>
+
                         <div class="w-full bg-gray-100 h-2 rounded-full overflow-hidden">
-                            <div class="bg-blue-600 h-full" style="width: 0%"></div>
+                            <div class="bg-blue-600 h-full" style="width: {{ $budget->percentage_used }}%"></div>
                         </div>
+
                         <div class="flex justify-between items-center mt-1 text-[11px]">
-                            <span class="text-gray-500 font-medium">0% used</span>
-                            <span class="text-green-600 font-bold">Well under budget</span>
+                            <span class="text-gray-500 font-medium">{{ number_format($budget->percentage_used, 1) }}% used</span>
+                            
+                            @if($budget->percentage_used >= 90)
+                                <span class="text-red-600 font-bold"><i class="fa-solid fa-triangle-exclamation mr-1"></i>Over budget risk</span>
+                            @else
+                                <span class="text-green-600 font-bold">On track</span>
+                            @endif
                         </div>
                     </div>
                 @empty
@@ -183,16 +192,6 @@
                 @endforelse
             </div>
         </div>
-
-        <div class="history-section">
-            <h3 class="text-lg font-bold mb-4 flex items-center gap-2">
-                <i class="fa-solid fa-chart-line text-green-500"></i> Budget Performance History
-            </h3>
-            <div class="history-placeholder flex items-center justify-center text-gray-400">
-                <i class="fa-solid fa-chart-area text-5xl opacity-20"></i>
-            </div>
-        </div>
-
     </main>
 </div>
 
