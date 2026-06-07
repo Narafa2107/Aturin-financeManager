@@ -33,12 +33,15 @@ class TransactionController extends Controller
     $validated = $request->validate([
         'type' => 'required',
         'description' => 'required',
-        'category' => 'required',
+        'category' => 'nullable',
         'amount' => 'required|numeric',
         'transaction_date' => 'required|date',
         'receipt' => 'nullable|image'
     ]);
-
+    if ($request->type === 'income') {
+    $validated['category'] = null;
+    }
+    
     if ($request->hasFile('receipt')) {
 
         $validated['receipt'] =
