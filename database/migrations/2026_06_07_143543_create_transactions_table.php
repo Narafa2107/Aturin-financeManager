@@ -22,8 +22,8 @@ return new class extends Migration
 
         $table->string('description');
 
-        $table->string('category');
-
+        $table->string('category')->nullable();
+        
         $table->decimal('amount', 15, 2);
 
         $table->string('receipt')->nullable();
@@ -33,7 +33,7 @@ return new class extends Migration
         $table->timestamps();
     });
     }
-    
+
     public function down(): void
     {
         Schema::dropIfExists('transactions');
