@@ -34,7 +34,7 @@
                     <p class="text-sm font-semibold" style="color:#1a7a25;">Revenue Growing</p>
                     <i class="fa-solid fa-arrow-trend-up" style="color:#2ecc40; font-size:1.1rem;"></i>
                 </div>
-                <p class="text-sm mt-3" style="color:#2d6b35; line-height:1.55;">Your income increased compared to last month. Keep it up!</p>
+                <p class="text-sm mt-3" style="color:#2d6b35; line-height:1.55;">{{ $AIinsights['revenue'] }}</p>
             </div>
 
             <!-- Profits Rising -->
@@ -43,7 +43,7 @@
                     <p class="text-sm font-semibold" style="color:#2b4db0;">Profits Rising</p>
                     <i class="fa-solid fa-dollar-sign" style="color:#4a6fd4; font-size:1.1rem;"></i>
                 </div>
-                <p class="text-sm mt-3" style="color:#3d5a9e; line-height:1.55;">Your clean profits keep rising. A good sign!</p>
+                <p class="text-sm mt-3" style="color:#3d5a9e; line-height:1.55;">{{ $AIinsights['profits'] }}</p>
             </div>
 
             <!-- Budget Running Low -->
@@ -52,7 +52,7 @@
                     <p class="text-sm font-semibold" style="color:#8a6a0a;">Budget Running Low</p>
                     <i class="fa-solid fa-triangle-exclamation" style="color:#f0c040; font-size:1.1rem;"></i>
                 </div>
-                <p class="text-sm mt-3" style="color:#7a6020; line-height:1.55;">Your budget is running low. Watch out!</p>
+                <p class="text-sm mt-3" style="color:#7a6020; line-height:1.55;">{{ $AIinsights['budget'] }}</p>
             </div>
 
             <!-- High Expenses -->
@@ -61,7 +61,7 @@
                     <p class="text-sm font-semibold" style="color:#a02898;">High Expenses</p>
                     <i class="fa-solid fa-arrow-trend-down" style="color:#d44abd; font-size:1.1rem;"></i>
                 </div>
-                <p class="text-sm mt-3" style="color:#8a4080; line-height:1.55;">Your expenses keep rising</p>
+                <p class="text-sm mt-3" style="color:#8a4080; line-height:1.55;">{{ $AIinsights['expenses'] }}</p>
             </div>
 
         </div>
@@ -83,19 +83,19 @@
                 <!-- Optimize Expenses -->
                 <div style="background:#daeefe; border-radius:12px; padding:20px 22px; border-top:4px solid #3a9fd4; flex:1; min-width:280px;">
                     <div class="flex justify-between items-start">
-                        <p class="text-sm font-semibold" style="color:#1868a0;">Optimize expenses</p>
+                        <p class="text-sm font-semibold" style="color:#1868a0;">{{ $AIinsights['recommendations'][0]['title'] }}</p>
                         <i class="fa-solid fa-sliders" style="color:#3a9fd4; font-size:1.1rem;"></i>
                     </div>
-                    <p class="text-sm mt-3" style="color:#2a6a90; line-height:1.55;">Incomes are always up, but expenses are also going up</p>
+                    <p class="text-sm mt-3" style="color:#2a6a90; line-height:1.55;">{{ $AIinsights['recommendations'][0]['content'] }}</p>
                 </div>
 
                 <!-- Allocate Profits -->
                 <div style="background:#e4f8ec; border-radius:12px; padding:20px 22px; border-top:4px solid #30d46e;flex:1; min-width:280px;">
                     <div class="flex justify-between items-start">
-                        <p class="text-sm font-semibold" style="color:#148040;">Allocate Profits</p>
+                        <p class="text-sm font-semibold" style="color:#148040;">{{ $AIinsights['recommendations'][1]['title'] }}</p>
                         <i class="fa-solid fa-layer-group" style="color:#30d46e; font-size:1.1rem;"></i>
                     </div>
-                    <p class="text-sm mt-3" style="color:#267848; line-height:1.55;">The profits are huge. Congrats! Allocate it to develop something in your company</p>
+                    <p class="text-sm mt-3" style="color:#267848; line-height:1.55;">{{ $AIinsights['recommendations'][1]['content'] }}</p>
                 </div>
             
         </div>

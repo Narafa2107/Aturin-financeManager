@@ -404,3 +404,24 @@
         border-dashed
         border-gray-200;
 }
+
+.transaction-form {
+    @apply bg-gray-100
+        rounded-2xl
+        p-8
+        flex
+        flex-col
+        gap-5;
+}
+
+.form-label {
+    @apply text-black
+        font-semibold
+        text-sm;
+}
+
+.form-group {
+    @apply flex
+        flex-col
+        gap-2;
+}

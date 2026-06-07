@@ -12,8 +12,8 @@
             </a>
         </li>
         <li>
-            <a href="{{ route('transactions') }}" 
-               class="sidebar-item {{ request()->routeIs('transactions') ? 'sidebar-active' : '' }}">
+            <a href="{{ route('transactions.index') }}"
+                class="sidebar-item {{ request()->routeIs('transactions.*') ? 'sidebar-active' : '' }}">
                 <i class="fa-solid fa-dollar-sign text-xl"></i>
                 <span class="sidebar-text">Transactions</span>
             </a>
