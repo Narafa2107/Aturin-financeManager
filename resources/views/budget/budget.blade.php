@@ -39,7 +39,7 @@
                             <option value="Marketing">Marketing</option>
                             <option value="Operations">Operations</option>
                             <option value="Technology">Technology</option>
-                            <option value="Salaries">Salaries</option>
+                            <option value="Salary">Salary</option>
                         </select>
                     </div>
 
