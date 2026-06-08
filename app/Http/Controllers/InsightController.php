@@ -57,10 +57,9 @@ class InsightController extends Controller
             'income_growth' => round($incomeGrowth, 2),
             'expense_growth' => round($expenseGrowth, 2),
         ]);
-
         return view(
             'insights.insights',
             compact('AIinsights')
         );
     }
-}
+}   

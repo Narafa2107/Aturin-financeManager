@@ -5,6 +5,7 @@ use App\Http\Controllers\BudgetController;
 use App\Http\Controllers\TransactionController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\InsightController;
+use App\Http\Controllers\StatisticsController;
 
 Route::get('/', function () {
     return view('auth.login');
@@ -16,12 +17,9 @@ Route::middleware('auth')->group(function () {
         return view('dashboard.dashboard');
     })->name('dashboard');
 
-    Route::get('/insights', [InsightController::class, 'index'])
-    ->name('insights');
+    Route::get('/insights', [InsightController::class, 'index'])->name('insights');
 
-    Route::get('/statistics', function () {
-        return view('statistics.statistics');
-    })->name('statistics');
+    Route::get('/statistics', [StatisticsController::class, 'index'])->name('statistics');
     
     Route::get('/budget', [BudgetController::class, 'index'])->name('budget');
     Route::post('/budget', [BudgetController::class, 'store'])->name('budget.store');

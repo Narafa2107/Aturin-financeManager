@@ -47,7 +47,9 @@
                     <p class="text-sm text-gray-600 font-medium">Total Income</p>
                     <i class="fa-solid fa-arrow-trend-up text-green-600 text-lg"></i>
                 </div>
-                <h2 class="text-2xl font-bold mt-3">Rp 10.500.000</h2>
+                <h2 class="text-2xl font-bold mt-3">
+                    Rp {{ number_format($totalIncome, 0, ',', '.') }}
+                </h2>
                 <p class="text-xs text-green-700 mt-1">+4,2% from last month</p>
             </div>
 
@@ -56,7 +58,9 @@
                     <p class="text-sm text-gray-600 font-medium">Total Expenses</p>
                     <i class="fa-solid fa-arrow-trend-down text-red-600 text-lg"></i>
                 </div>
-                <h2 class="text-2xl font-bold mt-3">Rp 12.231.420</h2>
+                <h2 class="text-2xl font-bold mt-3">
+                    Rp {{ number_format($totalExpense, 0, ',', '.') }}
+                </h2>
                 <p class="text-xs text-red-700 mt-1">-7,1% from last month</p>
             </div>
 
@@ -65,7 +69,9 @@
                     <p class="text-sm text-gray-600 font-medium">Net Profit</p>
                     <i class="fa-solid fa-arrow-trend-down text-red-600 text-lg"></i>
                 </div>
-                <h2 class="text-2xl font-bold mt-3">Rp 3.500.000</h2>
+                <h2 class="text-2xl font-bold mt-3">
+                    Rp {{ number_format($netProfit, 0, ',', '.') }}
+                </h2>
                 <p class="text-xs text-red-700 mt-1">-4,2% from last month</p>
             </div>
 
@@ -77,17 +83,13 @@
             <!-- Income vs Expenses Trend -->
             <div class="chart-card">
                 <h3 class="text-lg font-bold mb-4">Incomes vs Expenses Trend</h3>
-                <div class="chart-placeholder flex items-center justify-center text-gray-400">
-                    <i class="fa-solid fa-chart-line text-5xl opacity-30"></i>
-                </div>
+                <div id="incomeExpenseChart"></div>
             </div>
 
             <!-- Profit Trend -->
             <div class="chart-card">
                 <h3 class="text-lg font-bold mb-4">Profit Trend (6 Months)</h3>
-                <div class="chart-placeholder flex items-center justify-center text-gray-400">
-                    <i class="fa-solid fa-chart-area text-5xl opacity-30"></i>
-                </div>
+                <div id="profitChart"></div>
             </div>
 
         </div>
@@ -99,71 +101,60 @@
             <div class="grid grid-cols-2 gap-8 items-center">
 
                 {{-- Donut placeholder --}}
-                <div class="chart-placeholder flex items-center justify-center text-gray-400" style="height: 260px;">
-                    <i class="fa-solid fa-chart-pie text-5xl opacity-30"></i>
-                </div>
+                <div id="expenseDonutChart"></div>
 
                 {{-- Legend + Progress Bars --}}
                 <div class="flex flex-col gap-5">
 
-                    {{-- Marketing --}}
-                    <div>
-                        <div class="flex justify-between items-center mb-1">
-                            <div class="flex items-center gap-2">
-                                <span class="w-3 h-3 rounded-full bg-red-500 flex-shrink-0"></span>
-                                <span class="text-sm font-semibold text-gray-800">Marketing</span>
-                            </div>
-                            <span class="text-sm font-semibold text-gray-700">Rp -</span>
-                        </div>
-                        <div class="w-full bg-gray-200 rounded-full h-2">
-                            <div class="bg-red-500 h-2 rounded-full" style="width: 38.6%"></div>
-                        </div>
-                        <p class="text-xs text-gray-400 mt-1">38.6% of total expenses</p>
-                    </div>
+                   <div class="flex flex-col gap-5">
 
-                    {{-- Operations --}}
-                    <div>
-                        <div class="flex justify-between items-center mb-1">
-                            <div class="flex items-center gap-2">
-                                <span class="w-3 h-3 rounded-full bg-blue-500 flex-shrink-0"></span>
-                                <span class="text-sm font-semibold text-gray-800">Operations</span>
-                            </div>
-                            <span class="text-sm font-semibold text-gray-700">Rp -</span>
-                        </div>
-                        <div class="w-full bg-gray-200 rounded-full h-2">
-                            <div class="bg-blue-500 h-2 rounded-full" style="width: 27.9%"></div>
-                        </div>
-                        <p class="text-xs text-gray-400 mt-1">27.9% of total expenses</p>
-                    </div>
+                        @php
+                            $totalExpenseAmount = array_sum($categoryTotals);
+                        @endphp
 
-                    {{-- Technology --}}
-                    <div>
-                        <div class="flex justify-between items-center mb-1">
-                            <div class="flex items-center gap-2">
-                                <span class="w-3 h-3 rounded-full bg-purple-500 flex-shrink-0"></span>
-                                <span class="text-sm font-semibold text-gray-800">Technology</span>
-                            </div>
-                            <span class="text-sm font-semibold text-gray-700">Rp -</span>
-                        </div>
-                        <div class="w-full bg-gray-200 rounded-full h-2">
-                            <div class="bg-purple-500 h-2 rounded-full" style="width: 19.3%"></div>
-                        </div>
-                        <p class="text-xs text-gray-400 mt-1">19.3% of total expenses</p>
-                    </div>
+                        @foreach($expenseCategories as $category)
 
-                    {{-- Salaries --}}
-                    <div>
-                        <div class="flex justify-between items-center mb-1">
-                            <div class="flex items-center gap-2">
-                                <span class="w-3 h-3 rounded-full bg-yellow-400 flex-shrink-0"></span>
-                                <span class="text-sm font-semibold text-gray-800">Salaries</span>
+                            @php
+                                $percentage = $totalExpenseAmount > 0
+                                    ? ($category->total / $totalExpenseAmount) * 100
+                                    : 0;
+                            @endphp
+
+                            <div>
+
+                                <div class="flex justify-between items-center mb-1">
+
+                                    <div class="flex items-center gap-2">
+                                        <span class="w-3 h-3 rounded-full bg-green-500"></span>
+
+                                        <span class="text-sm font-semibold text-gray-800">
+                                            {{ ucfirst($category->category) }}
+                                        </span>
+                                    </div>
+
+                                    <span class="text-sm font-semibold text-gray-700">
+                                        Rp {{ number_format($category->total, 0, ',', '.') }}
+                                    </span>
+
+                                </div>
+
+                                <div class="w-full bg-gray-200 rounded-full h-2">
+
+                                    <div
+                                        class="bg-green-500 h-2 rounded-full"
+                                        style="width: {{ $percentage }}%">
+                                    </div>
+
+                                </div>
+
+                                <p class="text-xs text-gray-400 mt-1">
+                                    {{ number_format($percentage, 1) }}% of total expenses
+                                </p>
+
                             </div>
-                            <span class="text-sm font-semibold text-gray-700">Rp -</span>
-                        </div>
-                        <div class="w-full bg-gray-200 rounded-full h-2">
-                            <div class="bg-yellow-400 h-2 rounded-full" style="width: 14.2%"></div>
-                        </div>
-                        <p class="text-xs text-gray-400 mt-1">14.2% of total expenses</p>
+
+                        @endforeach
+
                     </div>
 
                 </div>
@@ -196,5 +187,101 @@
     </main>
 
 </div>
+<!-- Income vs Expense Line Chart -->
+<script>
+var options = {
+    chart: {
+        type: 'line',
+        height: 350
+    },
 
+    series: [
+        {
+            name: 'Income',
+            data: @json($incomeData)
+        },
+        {
+            name: 'Expense',
+            data: @json($expenseData)
+        }
+    ],
+
+    xaxis: {
+        categories: @json($months)
+    }
+};
+
+var chart = new ApexCharts(
+    document.querySelector("#incomeExpenseChart"),
+    options
+);
+
+chart.render();
+</script>
+<!-- Profit Trend Area Chart -->
+<script>
+var profitOptions = {
+
+    chart: {
+        type: 'area',
+        height: 350,
+        toolbar: {
+            show: false
+        }
+    },
+
+    series: [{
+        name: 'Profit',
+        data: @json($profitData)
+    }],
+
+    xaxis: {
+        categories: @json($months)
+    },
+
+    stroke: {
+        curve: 'smooth'
+    },
+
+    dataLabels: {
+        enabled: false
+    }
+};
+
+var profitChart = new ApexCharts(
+    document.querySelector("#profitChart"),
+    profitOptions
+);
+
+profitChart.render();
+</script>
+<!-- Expense Breakdown Donut Chart -->
+<script>
+var donutOptions = {
+
+    chart: {
+        type: 'donut',
+        height: 300
+    },
+
+    series: @json($categoryTotals),
+
+    labels: @json($categoryLabels),
+
+    legend: {
+        position: 'bottom'
+    },
+
+    dataLabels: {
+        enabled: true
+    }
+};
+
+var donutChart = new ApexCharts(
+    document.querySelector("#expenseDonutChart"),
+    donutOptions
+);
+
+donutChart.render();
+</script>
 @endsection
