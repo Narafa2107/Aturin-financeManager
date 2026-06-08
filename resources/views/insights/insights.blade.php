@@ -34,7 +34,7 @@
                     <p class="text-sm font-semibold" style="color:#1a7a25;">Revenue Growing</p>
                     <i class="fa-solid fa-arrow-trend-up" style="color:#2ecc40; font-size:1.1rem;"></i>
                 </div>
-                <p class="text-sm mt-3" style="color:#2d6b35; line-height:1.55;">{{ $AIinsights['revenue'] }}</p>
+                <p class="text-sm mt-3" style="color:#2d6b35; line-height:1.55;">{{ $AIinsights['revenue'] ?? 'Insight belum tersedia' }}</p>
             </div>
 
             <!-- Profits Rising -->
@@ -43,7 +43,7 @@
                     <p class="text-sm font-semibold" style="color:#2b4db0;">Profits Rising</p>
                     <i class="fa-solid fa-dollar-sign" style="color:#4a6fd4; font-size:1.1rem;"></i>
                 </div>
-                <p class="text-sm mt-3" style="color:#3d5a9e; line-height:1.55;">{{ $AIinsights['profits'] }}</p>
+                <p class="text-sm mt-3" style="color:#3d5a9e; line-height:1.55;">{{ data_get($AIinsights, 'profits', 'Insight belum tersedia') }}</p>
             </div>
 
             <!-- Budget Running Low -->
@@ -52,7 +52,7 @@
                     <p class="text-sm font-semibold" style="color:#8a6a0a;">Budget Running Low</p>
                     <i class="fa-solid fa-triangle-exclamation" style="color:#f0c040; font-size:1.1rem;"></i>
                 </div>
-                <p class="text-sm mt-3" style="color:#7a6020; line-height:1.55;">{{ $AIinsights['budget'] }}</p>
+                <p class="text-sm mt-3" style="color:#7a6020; line-height:1.55;">{{ data_get($AIinsights, 'budget', 'Insight belum tersedia') }}</p>
             </div>
 
             <!-- High Expenses -->
@@ -61,7 +61,7 @@
                     <p class="text-sm font-semibold" style="color:#a02898;">High Expenses</p>
                     <i class="fa-solid fa-arrow-trend-down" style="color:#d44abd; font-size:1.1rem;"></i>
                 </div>
-                <p class="text-sm mt-3" style="color:#8a4080; line-height:1.55;">{{ $AIinsights['expenses'] }}</p>
+                <p class="text-sm mt-3" style="color:#8a4080; line-height:1.55;">{{ data_get($AIinsights, 'expenses', 'Insight belum tersedia') }}</p>
             </div>
 
         </div>
