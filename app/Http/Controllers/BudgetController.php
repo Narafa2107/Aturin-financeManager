@@ -56,6 +56,10 @@ class BudgetController extends Controller
             return $budget;
         });
 
+        $criticalBudget = $budgets->filter(function ($budget) {
+            return $budget->percentage_used >= 70;
+        })->sortByDesc('percentage_used')->first();
+
         // 6. Lempar semua variabel perhitungan ke halaman Blade
         return view('budget.budget', compact(
             'budgets', 
@@ -63,7 +67,8 @@ class BudgetController extends Controller
             'unallocatedFunds', 
             'totalAllocated', 
             'totalRemaining',
-            'totalExpense'
+            'totalExpense',
+            'criticalBudget'
         ));
     }
 
@@ -117,5 +122,22 @@ class BudgetController extends Controller
         ]);
 
         return redirect()->route('budget')->with('success', 'Budget source added successfully!');
+    }
+
+    /**
+     * Menghapus jatah alokasi kategori budget tertentu
+     */
+    public function destroy($id)
+    {
+        // Cari data budget berdasarkan id dan pastikan itu milik user yang sedang login
+        $budget = Budget::where('id', $id)
+                        ->where('user_id', auth()->id())
+                        ->firstOrFail();
+
+        // Eksekusi hapus data dari MySQL
+        $budget->delete();
+
+        // Kembalikan ke halaman budget dengan pesan sukses
+        return redirect()->route('budget')->with('success', 'Budget allocation deleted successfully!');
     }
 }
