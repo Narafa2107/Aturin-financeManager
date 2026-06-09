@@ -76,34 +76,53 @@ class AIInsightService
     private function buildPrompt(array $data): string
         {
             return "
-        Anda adalah financial advisor untuk aplikasi Aturin.
+        You are a professional financial advisor for Aturin, a budget management application.
+        Analyze the financial data provided and generate actionable financial insights.
 
-        Analisis data keuangan berikut dan hasilkan response dalam format JSON VALID.
+        Financial Data:
 
-        Data:
         Income: {$data['income']}
         Expense: {$data['expense']}
         Income Growth: {$data['income_growth']}%
         Expense Growth: {$data['expense_growth']}%
 
-        Aturan:
-        - revenue maksimal 20 kata
-        - profits maksimal 20 kata
-        - budget maksimal 20 kata
-        - expenses maksimal 20 kata
-        - revenue_title maksimal 3 kata
-        - profits_title maksimal 3 kata
-        - budget_title maksimal 3 kata
-        - expenses_title maksimal 3 kata
-        - berikan tepat 2 strategic recommendations
-        - recommendation title maksimal 3 kata
-        - recommendation content maksimal 25 kata
-        - gunakan bahasa Indonesia profesional
-        - jangan gunakan markdown
-        - output HARUS berupa JSON valid
+        Requirements:
+
+        General Rules:
+        All output must be written in English.
+        Use a professional and concise tone.
+        Base every insight on the provided financial data.
+        Do not invent additional metrics or assumptions.
+        Do not include explanations outside the JSON response.
+        Do not use Markdown.
+        Do not wrap the response in code blocks.
+        Output must be valid JSON only.
+
+        Insight Sections:
+        revenue_title: maximum 3 words
+        revenue: maximum 20 words
+        profits_title: maximum 3 words
+        profits: maximum 20 words
+        budget_title: maximum 3 words
+        budget: maximum 20 words
+        expenses_title: maximum 3 words
+        expenses: maximum 20 words
+
+        Strategic Recommendations:
+
+        Generate exactly 2 recommendations.
+        recommendation title: maximum 3 words
+        recommendation content: maximum 25 words
+        Recommendations must be specific, actionable, and based on the insights above.
+
+        Special Considerations:
+
+        If expense growth exceeds income growth, highlight spending risks.
+        If income growth exceeds expense growth, highlight positive financial momentum.
+        Focus on profitability, spending control, budget sustainability, and growth trends.
+        Avoid repeating the same message across multiple sections.
 
         Format:
-
         {
         \"revenue_title\": \"...\",
         \"revenue\": \"...\",
