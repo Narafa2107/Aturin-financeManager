@@ -77,7 +77,7 @@
                     </button>
 
                     <a href="{{ route('transactions.index') }}"
-                       class="export-btn">
+                       class="cancel-btn">
                         Cancel
                     </a>
                 </div>

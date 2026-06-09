@@ -49,6 +49,17 @@
         transition
         hover:bg-green-300;
 }
+.filter-btn {
+    @apply mt-4 
+        px-6 
+        py-3 
+        rounded-xl 
+        bg-blue-400 
+        text-white 
+        font-semibold 
+        transition 
+        hover:bg-blue-300;
+}
 
 .expense-btn {
     @apply px-6
@@ -226,6 +237,16 @@
         border-white/20
         transition 
         hover:bg-white/20;
+}
+.cancel-btn {
+    @apply px-6 
+        py-3 
+        rounded-xl 
+        bg-red-300 
+        text-black 
+        font-semibold 
+        transition 
+        hover:bg-red-500;
 }
 
 /* ─── ADDON: FILTER BAR ───────────────────── */
@@ -414,11 +435,7 @@
         gap-5;
 }
 
-.form-label {
-    @apply text-black
-        font-semibold
-        text-sm;
-}
+
 
 .form-group {
     @apply flex

@@ -69,8 +69,9 @@
 }
 
 .form-label {
-    @apply block
-        mb-2;
+    @apply block mb-5 text-white
+        font-semibold
+        text-sm;
 }
 
 .auth-input {
@@ -80,7 +81,7 @@
         rounded-xl
         border
         border-gray-300
-        text-black
+        text-white
         bg-white;
 }
 
@@ -134,7 +135,7 @@
 }
 
 .left-description {
-    @apply text-gray-300
+    @apply text-white
         text-lg;
 }
 

@@ -25,6 +25,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/budget', [BudgetController::class, 'index'])->name('budget');
     Route::post('/budget', [BudgetController::class, 'store'])->name('budget.store');
     Route::post('/budget/source', [BudgetController::class, 'storeSource'])->name('budget.storeSource');
+    Route::delete('/budget/{id}', [BudgetController::class, 'destroy'])->name('budget.destroy');
     
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

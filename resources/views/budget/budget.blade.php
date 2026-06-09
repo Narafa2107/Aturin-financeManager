@@ -108,7 +108,7 @@
             <div class="p-4 bg-gray-800 rounded-xl border border-gray-700 shadow-md">
                 <p class="text-xs text-gray-400 font-medium uppercase tracking-wider">Total Allocated</p>
                 <p class="text-xl font-bold text-blue-500 mt-1">Rp {{ number_format($totalAllocated, 0, ',', '.') }}</p>
-                <p class="text-[10px] text-gray-500 mt-1">Total jatah budget divisi</p>
+                <p class="text-[10px] text-gray-500 mt-1">Total division budget allocation</p>
             </div>
             
             <div class="p-4 bg-gray-800 rounded-xl border border-gray-700 shadow-md">
@@ -118,18 +118,38 @@
             </div>
         </div>
 
-        <div class="flex flex-col gap-3 my-4">
-            <div class="budget-alert !border-red-200">
-                <div class="alert-side !bg-red-500"></div>
-                <div class="alert-content !text-red-800 !bg-red-50/50 w-full flex items-center gap-3">
-                    <i class="fa-solid fa-circle-exclamation text-lg text-red-500"></i>
-                    <div>
-                        <p class="font-bold text-sm">Over Budget Alert</p>
-                        <p class="text-sm mt-0.5">Marketing category is at 95.4% of allocated budget. Immediate action recommended. Approaching Limit</p>
+        @if($criticalBudget)
+            <div class="flex flex-col gap-3 my-4">
+                
+                {{-- JIKA SUDAH DI ATAS ATAU SAMA DENGAN 90% (ZONA MERAH) --}}
+                @if($criticalBudget->percentage_used >= 90)
+                    <div class="budget-alert !border-red-200">
+                        <div class="alert-side !bg-red-500"></div>
+                        <div class="alert-content !text-red-800 !bg-red-50/50 w-full flex items-center gap-3">
+                            <i class="fa-solid fa-circle-exclamation text-lg text-red-500"></i>
+                            <div>
+                                <p class="font-bold text-sm">Over Budget Alert</p>
+                                <p class="text-sm mt-0.5">The <strong>{{ $criticalBudget->category_name }}</strong> category has used <strong>{{ number_format($criticalBudget->percentage_used, 1) }}%</strong> of its allocated budget. Immediate action recommended!</p>
+                            </div>
+                        </div>
                     </div>
-                </div>
+                
+                {{-- JIKA DI ANTARA 70% - 89.9% (ZONA KUNING WARNING) --}}
+                @else
+                    <div class="budget-alert !border-yellow-200">
+                        <div class="alert-side !bg-yellow-500"></div>
+                        <div class="alert-content !text-yellow-800 !bg-yellow-50/50 w-full flex items-center gap-3">
+                            <i class="fa-solid fa-triangle-exclamation text-lg text-yellow-600"></i>
+                            <div>
+                                <p class="font-bold text-sm">Approaching Budget Limit</p>
+                                <p class="text-sm mt-0.5">The <strong>{{ $criticalBudget->category_name }}</strong> category spending is at <strong>{{ number_format($criticalBudget->percentage_used, 1) }}%</strong>. Please monitor closely.</p>
+                            </div>
+                        </div>
+                    </div>
+                @endif
+
             </div>
-        </div>
+        @endif
 
         <div class="category-budget-card">
             <h3 class="text-lg font-bold mb-5">Budget by Category</h3>
@@ -151,6 +171,15 @@
                                 
                                 <span class="font-bold text-sm">{{ $budget->category_name }}</span>
                             </div>
+
+                            <form action="{{ route('budget.destroy', $budget->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this budget allocation?')">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="text-gray-400 hover:text-red-500 transition duration-150">
+                                    <i class="fa-solid fa-trash-can text-xs"></i>
+                                </button>
+                            </form>
+                            
                         </div>
 
                         <div class="grid grid-cols-3 gap-3 text-center mb-2">
