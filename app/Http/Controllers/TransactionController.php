@@ -22,6 +22,13 @@ class TransactionController extends Controller
     if ($request->category) {
         $query->where('category', $request->category);
     }
+    if ($request->start_date) {
+    $query->whereDate('transaction_date', '>=', $request->start_date);
+    }
+
+    if ($request->end_date) {
+        $query->whereDate('transaction_date', '<=', $request->end_date);
+    }
 
     $transactions = $query->latest()->get();
 

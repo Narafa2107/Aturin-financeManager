@@ -20,9 +20,7 @@
                 <i class="fa-solid fa-plus mr-2"></i>
                 Add Transaction
             </a>
-            <button class="export-btn">
-                <i class="fa-solid fa-download mr-2"></i> Export
-            </button>
+           
         </div>
  
         <!-- Filter Bar -->
@@ -50,19 +48,34 @@
                 </select>
  
                 <!-- Category Dropdown -->
-                <select name="type" class="filter-select">
+                <select name="category" class="filter-select">
                     <option value="">All Categories</option>
                     <option value="marketing">Marketing</option>
                     <option value="sales">Sales</option>
                     <option value="operations">Operations</option>
                 </select>
             </div>
+            
  
             <div class="filter-bottom">
-                <!-- Date Range -->
-                <input type="date" class="date-input" placeholder="dd/mm/yyyy" />
-                <span class="text-gray-400 text-sm">to</span>
-                <input type="date" class="date-input" placeholder="dd/mm/yyyy" />
+                 <input
+                        type="date"
+                        name="start_date"
+                        value="{{ request('start_date') }}"
+                        class="date-input"
+                    >
+
+                    <span class="text-gray-400 text-sm">to</span>
+
+                    <input
+                        type="date"
+                        name="end_date"
+                        value="{{ request('end_date') }}"
+                        class="date-input"
+                    >
+                <button type="submit" class="filter-btn">
+                    Filter
+                </button>
             </div>
  
         </div>
@@ -99,6 +112,10 @@
                         <tr class="table-row">
 
                             <td class="table-cell">
+                                {{ \Carbon\Carbon::parse($transaction->transaction_date)->format('d/m/Y') }}
+                            </td>
+
+                            <td class="table-cell">
                                 @if($transaction->type == 'income')
                                     <span class="px-3 py-1 rounded-full bg-green-100 text-green-700 text-xs font-semibold">
                                         Income
@@ -108,10 +125,6 @@
                                         Expense
                                     </span>
                                 @endif
-                            </td>
-
-                            <td class="table-cell">
-                                {{ ucfirst($transaction->type) }}
                             </td>
 
                             <td class="table-cell">
