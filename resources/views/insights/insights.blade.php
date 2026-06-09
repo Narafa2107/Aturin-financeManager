@@ -31,7 +31,7 @@
             <!-- Revenue Growing -->
             <div class="summary-card" style="background:#e8f8ea; border-top:4px solid #2ecc40;">
                 <div class="flex justify-between items-start">
-                    <p class="text-sm font-semibold" style="color:#1a7a25;">Revenue Growing</p>
+                    <p class="text-sm font-semibold" style="color:#1a7a25;">{{ $AIinsights['revenue_title'] ?? 'Revenue Growing' }}</p>
                     <i class="fa-solid fa-arrow-trend-up" style="color:#2ecc40; font-size:1.1rem;"></i>
                 </div>
                 <p class="text-sm mt-3" style="color:#2d6b35; line-height:1.55;">{{ $AIinsights['revenue'] ?? 'Insight belum tersedia' }}</p>
@@ -40,7 +40,7 @@
             <!-- Profits Rising -->
             <div class="summary-card" style="background:#e8effe; border-top:4px solid #4a6fd4;">
                 <div class="flex justify-between items-start">
-                    <p class="text-sm font-semibold" style="color:#2b4db0;">Profits Rising</p>
+                    <p class="text-sm font-semibold" style="color:#2b4db0;">{{ $AIinsights['profits_title'] ?? 'Profits Rising' }}</p>
                     <i class="fa-solid fa-dollar-sign" style="color:#4a6fd4; font-size:1.1rem;"></i>
                 </div>
                 <p class="text-sm mt-3" style="color:#3d5a9e; line-height:1.55;">{{ data_get($AIinsights, 'profits', 'Insight belum tersedia') }}</p>
@@ -49,7 +49,7 @@
             <!-- Budget Running Low -->
             <div class="summary-card" style="background:#fef9e7; border-top:4px solid #f0c040;">
                 <div class="flex justify-between items-start">
-                    <p class="text-sm font-semibold" style="color:#8a6a0a;">Budget Running Low</p>
+                    <p class="text-sm font-semibold" style="color:#8a6a0a;">{{ $AIinsights['budget_title'] ?? 'Budget Running Low' }}</p>
                     <i class="fa-solid fa-triangle-exclamation" style="color:#f0c040; font-size:1.1rem;"></i>
                 </div>
                 <p class="text-sm mt-3" style="color:#7a6020; line-height:1.55;">{{ data_get($AIinsights, 'budget', 'Insight belum tersedia') }}</p>
@@ -58,7 +58,7 @@
             <!-- High Expenses -->
             <div class="summary-card" style="background:#fce8f5; border-top:4px solid #d44abd;">
                 <div class="flex justify-between items-start">
-                    <p class="text-sm font-semibold" style="color:#a02898;">High Expenses</p>
+                    <p class="text-sm font-semibold" style="color:#a02898;">{{ $AIinsights['expenses_title'] ?? 'High Expenses' }}</p>
                     <i class="fa-solid fa-arrow-trend-down" style="color:#d44abd; font-size:1.1rem;"></i>
                 </div>
                 <p class="text-sm mt-3" style="color:#8a4080; line-height:1.55;">{{ data_get($AIinsights, 'expenses', 'Insight belum tersedia') }}</p>
@@ -100,32 +100,113 @@
             
         </div>
 
-        <!-- This Month vs Last Month — reuse chart-card + middle-grid -->
+        <!-- This Month vs Last Month Comparison Chart -->
         <div class="chart-card" style="margin-top:8px;">
             <h3 class="text-lg font-bold mb-4">This Month vs Last Month Comparison</h3>
-            <div class="middle-grid" style="grid-template-columns:1fr 1fr; gap:16px;">
-
-                <div>
-                    <p class="text-xs font-semibold text-gray-500 mb-3" style="text-transform:uppercase; letter-spacing:0.5px;">This Month</p>
-                    <div class="chart-placeholder flex items-center justify-center flex-col" style="border:2px dashed #dde3e8; border-radius:10px; min-height:180px; background:#f7f9fb; gap:8px;">
-                        <i class="fa-solid fa-chart-line text-gray-300 text-4xl"></i>
-                        <p class="text-xs text-gray-400">No data yet</p>
-                    </div>
-                </div>
-
-                <div>
-                    <p class="text-xs font-semibold text-gray-500 mb-3" style="text-transform:uppercase; letter-spacing:0.5px;">Last Month</p>
-                    <div class="chart-placeholder flex items-center justify-center flex-col" style="border:2px dashed #dde3e8; border-radius:10px; min-height:180px; background:#f7f9fb; gap:8px;">
-                        <i class="fa-solid fa-chart-line text-gray-300 text-4xl"></i>
-                        <p class="text-xs text-gray-400">No data yet</p>
-                    </div>
-                </div>
-
-            </div>
+            <div id="comparisonChart"></div>
         </div>
 
     </main>
 
 </div>
+
+<!-- Comparison Chart Script -->
+<script>
+var comparisonOptions = {
+    chart: {
+        type: 'bar',
+        height: 350,
+        toolbar: {
+            show: true
+        }
+    },
+    
+    series: [
+        {
+            name: '{{ $comparisonData["monthLabel"] }}',
+            data: [
+                {{ $comparisonData["thisMonth"]["income"] }},
+                {{ $comparisonData["thisMonth"]["expense"] }},
+                {{ $comparisonData["thisMonth"]["profit"] }}
+            ]
+        },
+        {
+            name: '{{ $comparisonData["lastMonthLabel"] }}',
+            data: [
+                {{ $comparisonData["lastMonth"]["income"] }},
+                {{ $comparisonData["lastMonth"]["expense"] }},
+                {{ $comparisonData["lastMonth"]["profit"] }}
+            ]
+        }
+    ],
+    
+    xaxis: {
+        categories: ['Income', 'Expense', 'Profit'],
+        title: {
+            text: 'Financial Categories'
+        }
+    },
+    
+    yaxis: {
+        title: {
+            text: 'Amount (Rp)'
+        }
+    },
+    
+    plotOptions: {
+        bar: {
+            horizontal: false,
+            columnWidth: '55%',
+            borderRadius: 4,
+            dataLabels: {
+                position: 'top'
+            }
+        }
+    },
+    
+    dataLabels: {
+        enabled: true,
+        formatter: function (val) {
+            return 'Rp ' + new Intl.NumberFormat('id-ID').format(val);
+        },
+        offsetY: -20,
+        style: {
+            fontSize: '11px',
+            colors: ['#304758']
+        }
+    },
+    
+    stroke: {
+        show: true,
+        width: 2,
+        colors: ['transparent']
+    },
+    
+    tooltip: {
+        y: {
+            formatter: function (val) {
+                return 'Rp ' + new Intl.NumberFormat('id-ID').format(val);
+            }
+        }
+    },
+    
+    fill: {
+        opacity: 1,
+        colors: ['#2ecc40', '#065925']
+    },
+    
+    legend: {
+        position: 'bottom',
+        horizontalAlign: 'middle'
+    }
+};
+
+var comparisonChart = new ApexCharts(
+    document.querySelector("#comparisonChart"),
+    comparisonOptions
+);
+
+comparisonChart.render();
+</script>
 
 @endsection

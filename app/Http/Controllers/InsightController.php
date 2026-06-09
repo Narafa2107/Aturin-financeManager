@@ -30,6 +30,8 @@ class InsightController extends Controller
             ->whereYear('transaction_date', $currentYear)
             ->sum('amount');
 
+        $profit = $income - $expense;
+
         // LAST MONTH
         $lastIncome = Transaction::where('user_id', $user->id)
             ->where('type', 'income')
@@ -43,6 +45,8 @@ class InsightController extends Controller
             ->whereYear('transaction_date', $lastMonth->year)
             ->sum('amount');
 
+        $lastProfit = $lastIncome - $lastExpense;
+
         $incomeGrowth = $lastIncome > 0
             ? (($income - $lastIncome) / $lastIncome) * 100
             : 0;
@@ -50,6 +54,22 @@ class InsightController extends Controller
         $expenseGrowth = $lastExpense > 0
             ? (($expense - $lastExpense) / $lastExpense) * 100
             : 0;
+
+        // Format data untuk chart perbandingan
+        $comparisonData = [
+            'thisMonth' => [
+                'income' => $income,
+                'expense' => $expense,
+                'profit' => $profit
+            ],
+            'lastMonth' => [
+                'income' => $lastIncome,
+                'expense' => $lastExpense,
+                'profit' => $lastProfit
+            ],
+            'monthLabel' => Carbon::now()->format('F Y'),
+            'lastMonthLabel' => $lastMonth->format('F Y')
+        ];
 
         $AIinsights = $ai->generate([
             'income' => $income,
@@ -59,7 +79,7 @@ class InsightController extends Controller
         ]);
         return view(
             'insights.insights',
-            compact('AIinsights')
+            compact('AIinsights', 'comparisonData')
         );
     }
 }   

@@ -31,9 +31,13 @@ class AIInsightService
     // Jika Gemini error (quota habis, dll)
     if (isset($responseData['error'])) {
         return [
+            'revenue_title' => 'AI Tidak Tersedia',
             'revenue' => 'Insight AI sementara tidak tersedia.',
+            'profits_title' => 'AI Tidak Tersedia',
             'profits' => 'Insight AI sementara tidak tersedia.',
+            'budget_title' => 'AI Tidak Tersedia',
             'budget' => 'Insight AI sementara tidak tersedia.',
+            'expenses_title' => 'AI Tidak Tersedia',
             'expenses' => 'Insight AI sementara tidak tersedia.',
             'recommendations' => [
                 [
@@ -57,9 +61,13 @@ class AIInsightService
     $result = json_decode($text, true);
 
     return $result ?: [
+        'revenue_title' => 'Revenue Insight',
         'revenue' => 'Insight AI sementara tidak tersedia.',
+        'profits_title' => 'Profits Insight',
         'profits' => 'Insight AI sementara tidak tersedia.',
+        'budget_title' => 'Budget Insight',
         'budget' => 'Insight AI sementara tidak tersedia.',
+        'expenses_title' => 'Expenses Insight',
         'expenses' => 'Insight AI sementara tidak tersedia.',
         'recommendations' => []
     ];
@@ -83,6 +91,10 @@ class AIInsightService
         - profits maksimal 20 kata
         - budget maksimal 20 kata
         - expenses maksimal 20 kata
+        - revenue_title maksimal 3 kata
+        - profits_title maksimal 3 kata
+        - budget_title maksimal 3 kata
+        - expenses_title maksimal 3 kata
         - berikan tepat 2 strategic recommendations
         - recommendation title maksimal 3 kata
         - recommendation content maksimal 25 kata
@@ -93,9 +105,13 @@ class AIInsightService
         Format:
 
         {
+        \"revenue_title\": \"...\",
         \"revenue\": \"...\",
+        \"profits_title\": \"...\",
         \"profits\": \"...\",
+        \"budget_title\": \"...\",
         \"budget\": \"...\",
+        \"expenses_title\": \"...\",
         \"expenses\": \"...\",
         \"recommendations\": [
             {
