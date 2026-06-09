@@ -108,7 +108,7 @@
             <div class="p-4 bg-gray-800 rounded-xl border border-gray-700 shadow-md">
                 <p class="text-xs text-gray-400 font-medium uppercase tracking-wider">Total Allocated</p>
                 <p class="text-xl font-bold text-blue-500 mt-1">Rp {{ number_format($totalAllocated, 0, ',', '.') }}</p>
-                <p class="text-[10px] text-gray-500 mt-1">Total jatah budget divisi</p>
+                <p class="text-[10px] text-gray-500 mt-1">Total division budget allocation</p>
             </div>
             
             <div class="p-4 bg-gray-800 rounded-xl border border-gray-700 shadow-md">
