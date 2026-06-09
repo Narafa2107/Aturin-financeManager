@@ -425,3 +425,7 @@
         flex-col
         gap-2;
 }
+input[type="month"]::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+    cursor: pointer;
+}

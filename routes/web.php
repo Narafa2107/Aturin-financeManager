@@ -20,6 +20,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/insights', [InsightController::class, 'index'])->name('insights');
 
     Route::get('/statistics', [StatisticsController::class, 'index'])->name('statistics');
+    Route::get('/statistics/export/pdf', [StatisticsController::class, 'exportPdf'])->name('statistics.export.pdf');
     
     Route::get('/budget', [BudgetController::class, 'index'])->name('budget');
     Route::post('/budget', [BudgetController::class, 'store'])->name('budget.store');
