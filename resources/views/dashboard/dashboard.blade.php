@@ -6,17 +6,12 @@
 
     @include('partials.sidebar')
 
-
-
-    <!-- MAIN -->
     <main class="main-content">
 
-        <!-- Title -->
         <div class="top-title">
             <h1 class="text-4xl font-bold">Dashboard</h1>
         </div>
 
-        <!-- Action Buttons -->
         <div class="action-group">
             <button class="income-btn">
                 <i class="fa-solid fa-plus mr-2"></i> Add Income
@@ -26,7 +21,6 @@
             </button>
         </div>
 
-        <!-- Summary Cards -->
         <div class="summary-grid">
 
             <div class="summary-card income-card">
@@ -34,50 +28,46 @@
                     <p class="text-sm text-gray-600 font-medium">Total Income</p>
                     <i class="fa-solid fa-arrow-trend-up text-green-600 text-lg"></i>
                 </div>
-                <h2 class="text-2xl font-bold mt-3">Rp 10.500.000</h2>
-                <p class="text-xs text-green-700 mt-1">+4,2%</p>
-            </div>
+                <h2 class="text-2xl font-bold mt-3">Rp {{ number_format($totalIncome, 0, ',', '.') }}</h2>
+                <p class="text-xs text-green-700 mt-1">+4,2%</p> </div>
 
             <div class="summary-card expense-card">
                 <div class="flex justify-between items-start">
                     <p class="text-sm text-gray-600 font-medium">Total Expenses</p>
                     <i class="fa-solid fa-arrow-trend-down text-red-600 text-lg"></i>
                 </div>
-                <h2 class="text-2xl font-bold mt-3">Rp 12.231.420</h2>
+                <h2 class="text-2xl font-bold mt-3">Rp {{ number_format($totalExpense, 0, ',', '.') }}</h2>
                 <p class="text-xs text-red-700 mt-1">-7,1%</p>
             </div>
 
             <div class="summary-card expense-card">
                 <div class="flex justify-between items-start">
-                    <p class="text-sm text-gray-600 font-medium">Net Profit</p>
+                    <p class="text-sm text-gray-600 font-medium">Net Profit / Total Saldo</p>
                     <i class="fa-solid fa-arrow-trend-down text-red-600 text-lg"></i>
                 </div>
-                <h2 class="text-2xl font-bold mt-3">Rp 3.500.000</h2>
+                <h2 class="text-2xl font-bold mt-3">Rp {{ number_format($totalAssets, 0, ',', '.') }}</h2>
                 <p class="text-xs text-red-700 mt-1">-4,2%</p>
             </div>
 
             <div class="summary-card budget-card">
                 <div class="flex justify-between items-start">
-                    <p class="text-sm text-gray-600 font-medium">Budget</p>
+                    <p class="text-sm text-gray-600 font-medium">Remaining Budget</p>
                 </div>
-                <h2 class="text-2xl font-bold mt-3">Rp 5.000.000</h2>
+                <h2 class="text-2xl font-bold mt-3">Rp {{ number_format($totalRemaining, 0, ',', '.') }}</h2>
             </div>
 
         </div>
 
-        <!-- Budget Alert -->
         <div class="budget-alert">
             <div class="alert-side"></div>
             <div class="alert-content">
                 <p class="font-bold text-sm">Budget Alert</p>
-                <p class="text-sm mt-0.5">Estimated expense by the end of April : Rp 5.000.000</p>
+                <p class="text-sm mt-0.5">Dana bebas yang belum dialokasikan ke kategori apa pun : Rp {{ number_format($unallocatedFunds, 0, ',', '.') }}</p>
             </div>
         </div>
 
-        <!-- Chart + Recent Transaction -->
         <div class="middle-grid">
 
-            <!-- Chart -->
             <div class="chart-card">
                 <h3 class="text-lg font-bold mb-4">Income VS Expenses</h3>
                 <div class="chart-placeholder flex items-center justify-center text-gray-400">
@@ -85,62 +75,35 @@
                 </div>
             </div>
 
-            <!-- Recent Transactions -->
             <div class="transaction-card">
                 <h3 class="text-lg font-bold mb-5">Recent Transaction</h3>
 
                 <div class="transaction-list">
 
-                    <div class="transaction-item">
-                        <div class="transaction-icon expense-icon">
-                            <i class="fa-solid fa-arrow-down-right"></i>
+                    @forelse($recentTransactions as $transaction)
+                        <div class="transaction-item">
+                            <div class="transaction-icon {{ $transaction->type == 'income' ? 'income-icon' : 'expense-icon' }}">
+                                <i class="fa-solid {{ $transaction->type == 'income' ? 'fa-arrow-up-right' : 'fa-arrow-down-right' }}"></i>
+                            </div>
+                            <div class="transaction-info">
+                                <p class="font-semibold text-sm">{{ $transaction->description }}</p>
+                                <p class="text-xs text-gray-500 mt-0.5">{{ $transaction->created_at->format('M d, Y') }}</p>
+                            </div>
+                            <span class="transaction-amount {{ $transaction->type == 'income' ? 'text-green-600' : 'text-red-500' }} font-bold">
+                                {{ $transaction->type == 'income' ? '+' : '-' }} Rp {{ number_format($transaction->amount, 0, ',', '.') }}
+                            </span>
                         </div>
-                        <div class="transaction-info">
-                            <p class="font-semibold text-sm">Google Ads Campaign</p>
-                            <p class="text-xs text-gray-500 mt-0.5">May 11, 2026</p>
+                    @empty
+                        <div class="text-center py-8 text-gray-400 italic text-sm">
+                            Belum ada aktivitas transaksi.
                         </div>
-                        <span class="transaction-amount text-red-500 font-bold">- $5,000</span>
-                    </div>
-
-                    <div class="transaction-item">
-                        <div class="transaction-icon income-icon">
-                            <i class="fa-solid fa-arrow-up-right"></i>
-                        </div>
-                        <div class="transaction-info">
-                            <p class="font-semibold text-sm">Client Payment - Project A</p>
-                            <p class="text-xs text-gray-500 mt-0.5">May 11, 2026</p>
-                        </div>
-                        <span class="transaction-amount text-green-600 font-bold">+ $5,000</span>
-                    </div>
-
-                    <div class="transaction-item">
-                        <div class="transaction-icon income-icon">
-                            <i class="fa-solid fa-arrow-up-right"></i>
-                        </div>
-                        <div class="transaction-info">
-                            <p class="font-semibold text-sm">Client Payment - Project A</p>
-                            <p class="text-xs text-gray-500 mt-0.5">May 11, 2026</p>
-                        </div>
-                        <span class="transaction-amount text-green-600 font-bold">+ $5,000</span>
-                    </div>
-
-                    <div class="transaction-item">
-                        <div class="transaction-icon expense-icon">
-                            <i class="fa-solid fa-arrow-down-right"></i>
-                        </div>
-                        <div class="transaction-info">
-                            <p class="font-semibold text-sm">Google Ads Campaign</p>
-                            <p class="text-xs text-gray-500 mt-0.5">May 11, 2026</p>
-                        </div>
-                        <span class="transaction-amount text-red-500 font-bold">- $5,000</span>
-                    </div>
+                    @endforelse
 
                 </div>
             </div>
 
         </div>
 
-        <!-- Monthly Insight -->
         <div class="insight-section">
             <h3 class="text-lg font-bold mb-5">Monthly Insight</h3>
             <div class="insight-grid">
