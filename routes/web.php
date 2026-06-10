@@ -6,6 +6,7 @@ use App\Http\Controllers\TransactionController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\InsightController;
 use App\Http\Controllers\StatisticsController;
+use App\Http\Controllers\DashboardController; 
 
 Route::get('/', function () {
     return view('auth.login');
@@ -13,10 +14,7 @@ Route::get('/', function () {
 
 Route::middleware('auth')->group(function () {
 
-    Route::get('/dashboard', function () {
-        return view('dashboard.dashboard');
-    })->name('dashboard');
-
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/insights', [InsightController::class, 'index'])->name('insights');
 
     Route::get('/statistics', [StatisticsController::class, 'index'])->name('statistics');
