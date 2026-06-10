@@ -90,7 +90,7 @@
                             </div>
                             <div class="transaction-info">
                                 <p class="font-semibold text-sm">{{ $transaction->description }}</p>
-                                <p class="text-xs text-gray-500 mt-0.5">{{ $transaction->created_at->format('M d, Y') }}</p>
+                                <p class="text-xs text-gray-500 mt-0.5">{{ \Carbon\Carbon::parse($transaction->transaction_date)->format('M d, Y') }}</p>
                             </div>
                             <span class="transaction-amount {{ $transaction->type == 'income' ? 'text-green-600' : 'text-red-500' }} font-bold">
                                 {{ $transaction->type == 'income' ? '+' : '-' }} Rp {{ number_format($transaction->amount, 0, ',', '.') }}

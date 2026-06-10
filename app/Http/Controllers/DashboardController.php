@@ -25,19 +25,19 @@ class DashboardController extends Controller
         $totalIncome = Transaction::where('user_id', $userId)->where('type', 'income')->sum('amount');
         $totalExpense = Transaction::where('user_id', $userId)->where('type', 'expense')->sum('amount');
 
-        // 3. Eksekusi rumus finansial (sinkron dengan rumus BudgetController)
+        // Eksekusi rumus finansial (sinkron dengan rumus BudgetController)
         $totalAssets = $totalSource + ($totalIncome - $totalExpense);
         $totalAllocated = Budget::where('user_id', $userId)->sum('allocated_amount');
         $unallocatedFunds = $totalAssets - $totalAllocated;
         $totalRemaining = $totalAllocated - $totalExpense;
 
-        // 4. Ambil 4 riwayat transaksi paling baru milik user 
+        // Ambil 4 riwayat transaksi paling baru berdasarkan transaction_date
         $recentTransactions = Transaction::where('user_id', $userId)
-            ->latest()
+            ->orderBy('transaction_date', 'desc')
             ->take(4)
             ->get();
 
-        // 5. MONTHLY STATISTICS
+        // MONTHLY STATISTICS
         $currentMonth = Carbon::now();
         $lastMonth = Carbon::now()->subMonth();
 
