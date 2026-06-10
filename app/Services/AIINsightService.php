@@ -90,6 +90,7 @@ class AIInsightService
 
         General Rules:
         All output must be written in English.
+        'Format every money nominal with prefix Rp and a dot, example: Rp1.000.000'
         Use a professional and concise tone.
         Base every insight on the provided financial data.
         Do not invent additional metrics or assumptions.

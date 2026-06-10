@@ -37,7 +37,6 @@
                 <p class="text-sm mt-3" style="color:#2d6b35; line-height:1.55;">
                     @php
                         $text = $AIinsights['revenue'] ?? 'Insight belum tersedia';
-                        $text = preg_replace('/(\d+)(?:[.,]00)?\b/', 'Rp$1', $text);
                     @endphp
                     {!! $text !!}
                 </p>
@@ -52,7 +51,6 @@
                 <p class="text-sm mt-3" style="color:#3d5a9e; line-height:1.55;">
                     @php
                         $text = data_get($AIinsights, 'profits', 'Insight belum tersedia');
-                        $text = preg_replace('/(\d+)(?:[.,]00)?\b/', 'Rp$1', $text);
                     @endphp
                     {!! $text !!}
                 </p>
@@ -67,7 +65,6 @@
                 <p class="text-sm mt-3" style="color:#7a6020; line-height:1.55;">
                     @php
                         $text = data_get($AIinsights, 'budget', 'Insight belum tersedia');
-                        $text = preg_replace('/(\d+)(?:[.,]00)?\b/', 'Rp$1', $text);
                     @endphp
                     {!! $text !!}
                 </p>
@@ -82,7 +79,6 @@
                 <p class="text-sm mt-3" style="color:#8a4080; line-height:1.55;">
                     @php
                         $text = data_get($AIinsights, 'expenses', 'Insight belum tersedia');
-                        $text = preg_replace('/(\d+)(?:[.,]00)?\b/', 'Rp$1', $text);
                     @endphp
                     {!! $text !!}
                 </p>
@@ -113,7 +109,6 @@
                     <p class="text-sm mt-3" style="color:#2a6a90; line-height:1.55;">
                         @php
                             $text = $AIinsights['recommendations'][0]['content'];
-                            $text = preg_replace('/(\d+)(?:[.,]00)?\b/', 'Rp$1', $text);
                         @endphp
                         {!! $text !!}
                     </p>
@@ -128,7 +123,6 @@
                     <p class="text-sm mt-3" style="color:#267848; line-height:1.55;">
                         @php
                             $text = $AIinsights['recommendations'][1]['content'];
-                            $text = preg_replace('/(\d+)(?:[.,]00)?\b/', 'Rp$1', $text);
                         @endphp
                         {!! $text !!}
                     </p>

@@ -18,10 +18,10 @@ class DashboardController extends Controller
     {
         $userId = auth()->id();
 
-        // 1. Ambil modal dasar 
+        // Ambil modal dasar 
         $totalSource = BudgetSource::where('user_id', $userId)->sum('amount');
 
-        // 2. Hitung akumulasi transaksi (pemasukan & pengeluaran)
+        // Hitung akumulasi transaksi (pemasukan & pengeluaran)
         $totalIncome = Transaction::where('user_id', $userId)->where('type', 'income')->sum('amount');
         $totalExpense = Transaction::where('user_id', $userId)->where('type', 'expense')->sum('amount');
 
@@ -86,7 +86,7 @@ class DashboardController extends Controller
             $profitChange = (($currentProfit - $lastProfit) / abs($lastProfit)) * 100;
         }
 
-        // 6. INCOME VS EXPENSE TREND (6 MONTHS) untuk Chart
+        // INCOME VS EXPENSE TREND (6 MONTHS) untuk Chart
         $months = [];
         $incomeData = [];
         $expenseData = [];
@@ -112,7 +112,7 @@ class DashboardController extends Controller
             $expenseData[] = $expense;
         }
 
-        // 7. Kirim variabel ke view dashboard
+        // Kirim variabel ke view dashboard
         return view('dashboard.dashboard', compact(
             'totalAssets',
             'totalIncome',
