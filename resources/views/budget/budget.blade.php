@@ -72,9 +72,9 @@
                         <label class="block text-xs font-semibold text-gray-400 uppercase mb-2">Source Type</label>
                         <select name="source_name" required class="w-full bg-gray-950 border border-gray-700 rounded-xl px-3 py-2 text-white focus:outline-none focus:border-green-500">
                             <option value="" disabled selected>Select Source</option>
-                            <option value="Asset">Asset / Modal Sendiri</option>
-                            <option value="Loan">Pinjaman / Hutang</option>
-                            <option value="Other">Lainnya</option>
+                            <option value="Asset">Assets</option>
+                            <option value="Loan">Loan</option>
+                            <option value="Other">Others</option>
                         </select>
                     </div>
 

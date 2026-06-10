@@ -8,10 +8,11 @@
   A money manager system that allows users to track transactions (income and expenses), 
   view financial statistics, and receive insight suggestions 
   <br>
-  <i>(Currently not AI Based)</i>
+  <i>We implied an AI based solution using Gemini Model 2.5, Use your own API KEY to try out</i>
 </p>
 
 ## 📌 About Aturin
+
 Aturin is a web-based financial management application built with Laravel.  
 The system helps users manage their personal finances by recording income and expense transactions in an organized way.
 
@@ -22,12 +23,13 @@ With Aturin, users can:
 - 📈 Monitor spending habits
 - 💡 Receive insight suggestions based on transaction data
 - 🗂️ Manage financial records efficiently
-> Insight suggestions are currently rule-based and not powered by AI.
+    > Insight suggestions are powered by AI.
 
-credits to Aturen, a product made by Arkavidia 9.0 2nd Place Winner, UXVidia, A Team from Telkom University Purwokerto. 
+credits to Aturen, a product made by Arkavidia 9.0 2nd Place Winner, UXVidia, A Team from Telkom University Purwokerto.
 Aturin is made for college assignment purposes only, therefore there is no plagiarize attempt.
 
 ## ⚙️ Tech Stack
+
 - Laravel
 - PHP
 - MySQL
